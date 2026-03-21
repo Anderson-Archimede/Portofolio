@@ -11,7 +11,7 @@ export const translations = {
     },
     hero: {
       greeting: "Salut, je suis",
-      name: "Anderson Kouassi Ehoussou",
+      name: "Anderson Kouassi",
       fullName: "Kouassi Anderson Ehoussou",
       title: "Data Analyst & Consultant BI",
       subtitle:
