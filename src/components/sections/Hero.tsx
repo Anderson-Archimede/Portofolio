@@ -17,22 +17,23 @@ export default function Hero() {
       {/* Bottom fade to next section */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-bg to-transparent pointer-events-none z-10" />
 
-      <div className="relative z-20 flex flex-col items-center text-center px-5 w-full max-w-[1200px] mx-auto">
+      <div className="relative z-20 flex flex-col items-center text-center px-5 sm:px-8 w-full max-w-[1200px] mx-auto">
 
         {/* Profile photo — spinning ring */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-5"
+          className="mb-4 sm:mb-5"
         >
-          <div style={{ position: "relative", width: "200px", height: "200px" }}>
-            {/* Background glow orb behind photo */}
+          {/* Responsive photo size: 160px mobile, 200px sm+ */}
+          <div className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px]" style={{ position: "relative" }}>
+            {/* Background glow orb — clipped to section overflow-hidden */}
             <div
               aria-hidden="true"
               style={{
                 position: "absolute",
-                inset: "-40px",
+                inset: "-30px",
                 borderRadius: "50%",
                 background:
                   "radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%)",
@@ -62,12 +63,12 @@ export default function Hero() {
               }}
               aria-hidden="true"
             />
-            {/* Photo container */}
+            {/* Photo container — fills parent div */}
             <div
               style={{
                 position: "relative",
-                width: "200px",
-                height: "200px",
+                width: "100%",
+                height: "100%",
                 borderRadius: "50%",
                 overflow: "hidden",
                 border: "2px solid rgba(0,240,255,0.3)",
@@ -85,7 +86,7 @@ export default function Hero() {
                   onError={() => setImgError(true)}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-bg-card text-[56px] font-display font-bold text-accent">
+                <div className="w-full h-full flex items-center justify-center bg-bg-card text-[48px] sm:text-[56px] font-display font-bold text-accent">
                   AK
                 </div>
               )}
@@ -139,12 +140,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.75, duration: 0.7 }}
-          className="space-y-4 mt-10"
+          className="space-y-3 sm:space-y-4 mt-6 sm:mt-10 w-full"
+          style={{ maxWidth: "560px" }}
         >
           {/* "Since" line */}
           <p
             style={{
-              fontSize: "16px",
+              fontSize: "14px",
               color: "rgba(255,255,255,0.55)",
               fontFamily: "var(--font-mono)",
             }}
@@ -152,22 +154,24 @@ export default function Hero() {
             {t.hero.since}
           </p>
 
-          {/* "Currently" pill-link */}
+          {/* "Currently" pill-link — wraps gracefully on mobile */}
           <a
             href="#experience"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              fontSize: "16px",
+              fontSize: "14px",
               color: "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              padding: "8px 16px",
+              padding: "8px 14px",
               borderRadius: "6px",
               border: "1px solid rgba(255,255,255,0.1)",
               background: "rgba(255,255,255,0.04)",
               transition: "all 0.2s",
               backdropFilter: "blur(8px)",
+              maxWidth: "100%",
+              flexWrap: "wrap",
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
@@ -184,8 +188,8 @@ export default function Hero() {
           >
             <span
               style={{
-                width: "8px",
-                height: "8px",
+                width: "7px",
+                height: "7px",
                 borderRadius: "50%",
                 background: "#22c55e",
                 boxShadow: "0 0 8px rgba(34,197,94,0.6)",
@@ -193,9 +197,9 @@ export default function Hero() {
               }}
               aria-hidden="true"
             />
-            {t.hero.currently}
+            <span style={{ flex: 1 }}>{t.hero.currently}</span>
             <svg
-              style={{ width: "14px", height: "14px", opacity: 0.6 }}
+              style={{ width: "13px", height: "13px", opacity: 0.6, flexShrink: 0 }}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -210,20 +214,12 @@ export default function Hero() {
             </svg>
           </a>
 
-          {/* Two CTA buttons */}
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              marginTop: "12px",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a href="#about" className="btn btn-primary">
+          {/* Two CTA buttons — stack on mobile, row on sm+ */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-2 sm:mt-3 sm:justify-center">
+            <a href="#about" className="btn btn-primary" style={{ justifyContent: "center" }}>
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn btn-secondary">
+            <a href="#contact" className="btn btn-secondary" style={{ justifyContent: "center" }}>
               {t.hero.contact}
             </a>
           </div>

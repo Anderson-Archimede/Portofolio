@@ -19,7 +19,7 @@ export default function About() {
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         <ScrollReveal>
           <SectionLabel text={t.about.label} />
-          <h2 className="section-title font-display mt-4 mb-16">
+          <h2 className="section-title font-display mt-4 mb-10 md:mb-16">
             {t.about.title}
           </h2>
         </ScrollReveal>
@@ -29,14 +29,14 @@ export default function About() {
           <ScrollReveal delay={0.1}>
             <p
               style={{
-                fontSize: "clamp(18px, 2.2vw, 22px)",
+                fontSize: "clamp(16px, 2.2vw, 22px)",
                 lineHeight: "1.65",
                 color: "var(--color-text)",
                 fontFamily: "var(--font-display)",
                 fontWeight: 500,
                 fontStyle: "italic",
                 borderLeft: "3px solid var(--color-accent)",
-                paddingLeft: "20px",
+                paddingLeft: "16px",
               }}
             >
               {t.about.p1}
@@ -47,8 +47,8 @@ export default function About() {
           <ScrollReveal delay={0.18}>
             <p
               style={{
-                fontSize: "18px",
-                lineHeight: "1.9",
+                fontSize: "clamp(15px, 2vw, 18px)",
+                lineHeight: "1.85",
                 color: "var(--color-text-secondary)",
               }}
             >
@@ -60,8 +60,8 @@ export default function About() {
           <ScrollReveal delay={0.26}>
             <p
               style={{
-                fontSize: "18px",
-                lineHeight: "1.9",
+                fontSize: "clamp(15px, 2vw, 18px)",
+                lineHeight: "1.85",
                 color: "var(--color-text-secondary)",
               }}
             >
@@ -86,6 +86,7 @@ export default function About() {
               {t.about.metrics.map((m) => (
                 <div
                   key={m.label}
+                  data-card="metric"
                   style={{
                     padding: "20px 16px",
                     textAlign: "center",
@@ -94,7 +95,7 @@ export default function About() {
                 >
                   <div
                     style={{
-                      fontSize: "clamp(24px, 4vw, 32px)",
+                      fontSize: "clamp(20px, 4vw, 32px)",
                       fontWeight: 700,
                       fontFamily: "var(--font-display)",
                       background: "linear-gradient(135deg, #00f0ff, #7dd3fc)",
@@ -109,11 +110,12 @@ export default function About() {
                   </div>
                   <div
                     style={{
-                      fontSize: "11px",
+                      fontSize: "10px",
                       color: "rgba(255,255,255,0.5)",
                       textTransform: "uppercase",
-                      letterSpacing: "1.2px",
+                      letterSpacing: "0.8px",
                       fontFamily: "var(--font-mono)",
+                      lineHeight: 1.4,
                     }}
                   >
                     {m.label}

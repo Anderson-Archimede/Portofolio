@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 
@@ -24,6 +24,30 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  // Close menu on Escape key
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) setIsOpen(false);
+    },
+    [isOpen]
+  );
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   useEffect(() => {
     const sectionIds = ["about", "skills", "experience", "terminal", "contact"];
@@ -119,7 +143,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile header */}
-      <div className="flex md:hidden items-center justify-between px-6 py-5">
+      <div className="flex md:hidden items-center justify-between px-5 py-4">
         <a
           href="#"
           className="font-display font-bold text-[20px]"
@@ -132,26 +156,40 @@ export default function Navbar() {
           <LangToggle lang={lang} setLang={setLang} size="sm" />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="w-6 h-4 flex flex-col justify-between ml-1"
-            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            className="flex items-center justify-center ml-1 rounded-lg"
+            style={{
+              width: "44px",
+              height: "44px",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              flexShrink: 0,
+            }}
+            aria-label={
+              isOpen
+                ? lang === "fr" ? "Fermer le menu" : "Close menu"
+                : lang === "fr" ? "Ouvrir le menu" : "Open menu"
+            }
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            <span
-              className={`block w-full h-[1.5px] bg-text transition-all duration-300 origin-center ${
-                isOpen ? "rotate-45 translate-y-[7px]" : ""
-              }`}
-            />
-            <span
-              className={`block w-full h-[1.5px] bg-text transition-all duration-300 ${
-                isOpen ? "opacity-0 scale-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-full h-[1.5px] bg-text transition-all duration-300 origin-center ${
-                isOpen ? "-rotate-45 -translate-y-[7px]" : ""
-              }`}
-            />
+            <span className="w-6 h-4 flex flex-col justify-between" aria-hidden="true">
+              <span
+                className={`block w-full h-[1.5px] bg-text transition-all duration-300 origin-center ${
+                  isOpen ? "rotate-45 translate-y-[7px]" : ""
+                }`}
+              />
+              <span
+                className={`block w-full h-[1.5px] bg-text transition-all duration-300 ${
+                  isOpen ? "opacity-0 scale-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-full h-[1.5px] bg-text transition-all duration-300 origin-center ${
+                  isOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                }`}
+              />
+            </span>
           </button>
         </div>
       </div>
@@ -161,29 +199,70 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-[rgba(8,8,8,0.98)] backdrop-blur-[24px] border-b border-border overflow-hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="md:hidden border-b border-border overflow-hidden"
+            style={{
+              background: "rgba(8,8,8,0.99)",
+              backdropFilter: "blur(32px)",
+              WebkitBackdropFilter: "blur(32px)",
+            }}
           >
-            <div className="flex flex-col items-center gap-7 py-12">
-              {links.map((link) => (
+            <nav aria-label={lang === "fr" ? "Menu principal" : "Main menu"}>
+              <div className="flex flex-col py-6 px-5" style={{ gap: "2px" }}>
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    aria-current={activeSection === link.id ? "page" : undefined}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "14px 16px",
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      transition: "all 0.18s ease",
+                      color:
+                        activeSection === link.id
+                          ? "var(--color-accent)"
+                          : "var(--color-text-secondary)",
+                      background:
+                        activeSection === link.id
+                          ? "rgba(0,240,255,0.06)"
+                          : "transparent",
+                      borderLeft:
+                        activeSection === link.id
+                          ? "2px solid var(--color-accent)"
+                          : "2px solid transparent",
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+              {/* Footer zone: cta */}
+              <div
+                style={{
+                  padding: "12px 21px 20px",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href="#contact"
                   onClick={() => setIsOpen(false)}
-                  aria-current={activeSection === link.id ? "true" : undefined}
-                  className={`text-[20px] font-semibold transition-colors duration-200 ${
-                    activeSection === link.id
-                      ? "text-accent"
-                      : "text-text-secondary hover:text-accent"
-                  }`}
+                  className="btn btn-primary"
+                  style={{ fontSize: "13px", padding: "10px 20px", display: "inline-flex" }}
                 >
-                  {link.label}
+                  {lang === "fr" ? "Me contacter" : "Contact me"}
                 </a>
-              ))}
-            </div>
+              </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

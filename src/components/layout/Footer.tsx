@@ -10,7 +10,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border py-10" style={{ position: "relative" }}>
+    <footer className="border-t border-border pt-8 pb-24" style={{ position: "relative" }}>
       <div
         aria-hidden="true"
         style={{
@@ -24,7 +24,7 @@ export default function Footer() {
             "linear-gradient(to right, transparent, rgba(0,240,255,0.4), transparent)",
         }}
       />
-      <div className="max-w-[1200px] mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-text-muted">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] sm:text-[13px] text-text-muted text-center sm:text-left">
         <p className="font-mono">
           &copy; {new Date().getFullYear()} Anderson Kouassi.{" "}
           <span>{t.footer.rights}</span>

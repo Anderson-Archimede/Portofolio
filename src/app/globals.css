@@ -39,10 +39,16 @@
 
 html {
   scroll-behavior: smooth;
-  /* Offset for fixed navbar */
-  scroll-padding-top: 80px;
+  /* Offset for fixed navbar — smaller on mobile */
+  scroll-padding-top: 70px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
 }
 
 body {
@@ -51,6 +57,7 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Focus-visible — keyboard navigation (WCAG AA) */
@@ -102,7 +109,7 @@ body {
 
 /* crshdn-style title — fills full viewport width */
 .crshdn-title {
-  font-size: clamp(72px, 13.5vw, 170px);
+  font-size: clamp(34px, 10vw, 170px);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.045em;
@@ -110,7 +117,7 @@ body {
 
 /* Hero name line — single line on tablet+, wraps naturally on mobile */
 .crshdn-name {
-  font-size: clamp(72px, 13.5vw, 170px);
+  font-size: clamp(34px, 10vw, 170px);
 }
 
 @media (min-width: 768px) {
@@ -122,7 +129,7 @@ body {
 
 /* Section titles */
 .section-title {
-  font-size: clamp(34px, 6vw, 60px);
+  font-size: clamp(28px, 6vw, 60px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.05;
@@ -306,5 +313,68 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Mobile responsive overrides ──────────────────────────────── */
+@media (max-width: 767px) {
+  /* Card base: smaller padding on mobile */
+  .card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  /* Section labels: tighter label badge */
+  .label-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+  }
+
+  /* Buttons: full-width on very small screens */
+  .btn {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  /* Experience card: override inline padding via data attribute */
+  [data-card="experience"] {
+    padding: 20px 18px !important;
+  }
+
+  /* About metrics: tighter cells */
+  [data-card="metric"] {
+    padding: 14px 8px !important;
+  }
+
+  /* Terminal body */
+  [data-terminal="body"] {
+    height: 300px !important;
+    padding: 14px 14px !important;
+    font-size: 12px !important;
+  }
+
+  /* Terminal title bar */
+  [data-terminal="titlebar"] {
+    padding: 10px 14px !important;
+  }
+
+  /* Contact email card: stack vertically */
+  [data-contact="email-card"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 18px 20px !important;
+  }
+
+  /* Contact email text: allow ellipsis on very small */
+  [data-contact="email-text"] {
+    font-size: 14px !important;
+    word-break: break-all;
+  }
+
+  /* Contact email actions: right-aligned row */
+  [data-contact="email-actions"] {
+    width: 100%;
+    justify-content: flex-start !important;
   }
 }

@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 
-// Keys belonging to each group (order matches i18n object order)
 const TECH_KEYS = ["dataViz", "dataEng", "cloud", "management"];
 const FUNC_KEYS = ["businessAnalysis", "methodology", "tools"];
 
@@ -22,29 +19,14 @@ type Category = {
 
 export default function Skills() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 85%", "end 25%"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 25,
-    restDelta: 0.001,
-  });
-
-  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  const tipOpacity = useTransform(smoothProgress, [0, 0.04], [0, 1]);
 
   const all = Object.entries(t.skills.categories) as [string, Category][];
   const techCats = all.filter(([k]) => TECH_KEYS.includes(k));
   const funcCats = all.filter(([k]) => FUNC_KEYS.includes(k));
 
   return (
-    <section id="skills" ref={sectionRef} className="section-padding bg-bg-secondary">
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <section id="skills" className="section-padding bg-bg-secondary">
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
         <ScrollReveal>
           <SectionLabel text={t.skills.label} />
@@ -53,118 +35,49 @@ export default function Skills() {
           </h2>
         </ScrollReveal>
 
-        {/* ─── DESKTOP TIMELINE ─── */}
-        <div className="hidden md:block" style={{ position: "relative" }}>
+        {/* ── Technical group ── */}
+        <ScrollReveal>
+          <GroupLabel label={t.skills.groupTech} color={GREEN} />
+        </ScrollReveal>
 
-          {/* Static base line — subtle green tint */}
-          <div
-            style={{
-              position: "absolute",
-              left: "20px",
-              top: 0,
-              bottom: 0,
-              width: "2px",
-              background:
-                "linear-gradient(to bottom, rgba(34,197,94,0.2) 0%, rgba(34,197,94,0.06) 100%)",
-              transform: "translateX(-50%)",
-            }}
-          />
-
-          {/* Animated green fill */}
-          <motion.div
-            style={{
-              position: "absolute",
-              left: "calc(20px - 1.5px)",
-              top: 0,
-              width: "3px",
-              height: lineHeight,
-              background:
-                "linear-gradient(to bottom, #22c55e 0%, #16a34a 80%, rgba(34,197,94,0.3) 100%)",
-              boxShadow:
-                "0 0 8px rgba(34,197,94,0.5), 0 0 20px rgba(34,197,94,0.2)",
-              borderRadius: "2px",
-              zIndex: 2,
-            }}
-          />
-
-          {/* Glowing moving tip */}
-          <motion.div
-            style={{
-              position: "absolute",
-              left: "20px",
-              top: lineHeight,
-              opacity: tipOpacity,
-              transform: "translateX(-50%) translateY(-50%)",
-              width: "14px",
-              height: "14px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, #22c55e 30%, rgba(34,197,94,0.3) 100%)",
-              boxShadow:
-                "0 0 16px rgba(34,197,94,0.9), 0 0 32px rgba(34,197,94,0.5), 0 0 48px rgba(34,197,94,0.2)",
-              zIndex: 5,
-            }}
-          />
-
-          {/* Content — offset to the right of timeline */}
-          <div style={{ paddingLeft: "56px" }}>
-
-            {/* ── GROUP 1: Technical ── */}
-            <GroupDivider label={t.skills.groupTech} color={GREEN} count={techCats.length} />
-            {techCats.map(([key, cat], i) => (
-              <ScrollReveal key={key} delay={Math.min(i * 0.1, 0.3)}>
-                <div style={{ position: "relative", marginBottom: "20px" }}>
-                  <TimelineDot accent={GREEN} highlighted={i === 0} delay={Math.min(i * 0.1, 0.3)} />
-                  <SkillCard
-                    category={cat}
-                    accent={GREEN}
-                    highlighted={i === 0}
-                  />
-                </div>
-              </ScrollReveal>
-            ))}
-
-            {/* ── GROUP 2: Functional ── */}
-            <GroupDivider label={t.skills.groupFunc} color={CYAN} count={funcCats.length} topGap />
-            {funcCats.map(([key, cat], i) => (
-              <ScrollReveal key={key} delay={Math.min((i + techCats.length + 1) * 0.1, 0.3)}>
-                <div
-                  style={{
-                    position: "relative",
-                    marginBottom: i < funcCats.length - 1 ? "20px" : 0,
-                  }}
-                >
-                  <TimelineDot
-                    accent={CYAN}
-                    highlighted={i === 0}
-                    delay={Math.min((i + techCats.length + 1) * 0.1, 0.3)}
-                  />
-                  <SkillCard
-                    category={cat}
-                    accent={CYAN}
-                    highlighted={i === 0}
-                  />
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── MOBILE: stacked cards ─── */}
-        <div className="md:hidden" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <MobileGroupLabel label={t.skills.groupTech} color={GREEN} />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "20px",
+            marginBottom: "48px",
+          }}
+        >
           {techCats.map(([key, cat], i) => (
             <ScrollReveal key={key} delay={Math.min(i * 0.08, 0.24)}>
-              <SkillCard category={cat} accent={GREEN} highlighted={i === 0} mobile />
+              <SkillCard
+                category={cat}
+                accent={GREEN}
+                index={i + 1}
+              />
             </ScrollReveal>
           ))}
+        </div>
 
-          <div style={{ marginTop: "16px" }}>
-            <MobileGroupLabel label={t.skills.groupFunc} color={CYAN} />
-          </div>
+        {/* ── Functional group ── */}
+        <ScrollReveal>
+          <GroupLabel label={t.skills.groupFunc} color={CYAN} />
+        </ScrollReveal>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "20px",
+          }}
+        >
           {funcCats.map(([key, cat], i) => (
             <ScrollReveal key={key} delay={Math.min(i * 0.08, 0.24)}>
-              <SkillCard category={cat} accent={CYAN} highlighted={i === 0} mobile />
+              <SkillCard
+                category={cat}
+                accent={CYAN}
+                index={techCats.length + i + 1}
+              />
             </ScrollReveal>
           ))}
         </div>
@@ -174,219 +87,142 @@ export default function Skills() {
   );
 }
 
-/* ─── Sub-components ─── */
+/* ─── Group label ─── */
 
-function GroupDivider({
-  label,
-  color,
-  count,
-  topGap = false,
-}: {
-  label: string;
-  color: string;
-  count: number;
-  topGap?: boolean;
-}) {
+function GroupLabel({ label, color }: { label: string; color: string }) {
   return (
-    <ScrollReveal>
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          marginBottom: "20px",
-          marginTop: topGap ? "52px" : "0",
-        }}
-      >
-        {/* Diamond marker on timeline */}
-        <div
-          style={{
-            position: "absolute",
-            left: "-36px",
-            top: "50%",
-            transform: "translateX(-50%) translateY(-50%) rotate(45deg)",
-            width: "8px",
-            height: "8px",
-            background: color,
-            boxShadow: `0 0 10px ${color}cc`,
-            zIndex: 10,
-          }}
-        />
-        <span
-          style={{
-            fontSize: "11px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color,
-            fontFamily: "var(--font-mono)",
-            fontWeight: 700,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {label}
-        </span>
-        {/* Count badge */}
-        <span
-          style={{
-            fontSize: "10px",
-            color,
-            background: `${color}18`,
-            border: `1px solid ${color}30`,
-            borderRadius: "100px",
-            padding: "1px 8px",
-            fontFamily: "var(--font-mono)",
-            fontWeight: 600,
-            whiteSpace: "nowrap",
-          }}
-        >
-          ×{count}
-        </span>
-        <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background: `linear-gradient(to right, ${color}40, transparent)`,
-          }}
-        />
-      </div>
-    </ScrollReveal>
-  );
-}
-
-function MobileGroupLabel({
-  label,
-  color,
-}: {
-  label: string;
-  color: string;
-}) {
-  return (
-    <h3
+    <div
       style={{
-        fontSize: "11px",
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-        color,
-        fontFamily: "var(--font-mono)",
-        fontWeight: 600,
-        marginBottom: "8px",
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        marginBottom: "20px",
       }}
     >
-      {label}
-    </h3>
+      <span
+        style={{
+          fontSize: "11px",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color,
+          fontFamily: "var(--font-mono)",
+          fontWeight: 700,
+          whiteSpace: "nowrap",
+        }}
+      >
+        {label}
+      </span>
+      <div
+        style={{
+          flex: 1,
+          height: "1px",
+          background: `linear-gradient(to right, ${color}40, transparent)`,
+        }}
+      />
+    </div>
   );
 }
 
-function TimelineDot({
-  accent,
-  highlighted,
-  delay,
-}: {
-  accent: string;
-  highlighted: boolean;
-  delay: number;
-}) {
-  return (
-    <motion.div
-      initial={{ scale: 0, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: delay + 0.15 }}
-      style={{
-        position: "absolute",
-        left: "-36px",
-        top: "26px",
-        transform: "translateX(-50%)",
-        width: "12px",
-        height: "12px",
-        borderRadius: "50%",
-        background: "var(--color-bg-secondary)",
-        border: `${highlighted ? "3px" : "2px"} solid ${accent}`,
-        boxShadow: `0 0 ${highlighted ? "12px" : "7px"} ${accent}cc, 0 0 ${highlighted ? "24px" : "14px"} ${accent}55`,
-        zIndex: 10,
-      }}
-    />
-  );
-}
+/* ─── Card ─── */
 
 function SkillCard({
   category,
   accent,
-  highlighted,
-  mobile = false,
+  index,
 }: {
   category: Category;
   accent: string;
-  highlighted: boolean;
-  mobile?: boolean;
+  index: number;
 }) {
-  const borderLeft = highlighted
-    ? `3px solid ${accent}`
-    : "1px solid var(--color-border)";
+  const num = String(index).padStart(2, "0");
 
   return (
     <div
       className="group"
       style={{
-        background: highlighted
-          ? `radial-gradient(ellipse at top left, ${accent}0d 0%, var(--color-bg-card) 55%)`
-          : "var(--color-bg-card)",
+        background: "var(--color-bg-card)",
         border: "1px solid var(--color-border)",
-        borderLeft,
-        padding: mobile ? "18px 20px" : "24px 28px",
-        borderRadius: "4px",
-        transition:
-          "border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
+        borderTop: `3px solid ${accent}`,
+        borderRadius: "12px",
+        padding: "28px 28px 24px",
+        transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, background 0.3s ease",
         cursor: "default",
         position: "relative",
         overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0",
       }}
       onMouseEnter={(e) => {
-        if (mobile) return;
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = `${accent}70`;
-        el.style.transform = "translateY(-4px) scale(1.01)";
-        el.style.boxShadow = `0 20px 50px rgba(0,0,0,0.35), 0 0 24px ${accent}18`;
-        el.style.background = highlighted
-          ? `radial-gradient(ellipse at top left, ${accent}14 0%, var(--color-bg-card-hover) 60%)`
-          : "var(--color-bg-card-hover)";
+        el.style.transform = "translateY(-6px)";
+        el.style.boxShadow = `0 24px 60px rgba(0,0,0,0.4), 0 0 30px ${accent}14`;
+        el.style.background = "var(--color-bg-card-hover)";
+        el.style.borderColor = `${accent}55`;
+        el.style.borderTopColor = accent;
       }}
       onMouseLeave={(e) => {
-        if (mobile) return;
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = "var(--color-border)";
-        el.style.transform = "translateY(0) scale(1)";
+        el.style.transform = "translateY(0)";
         el.style.boxShadow = "none";
-        el.style.background = highlighted
-          ? `radial-gradient(ellipse at top left, ${accent}0d 0%, var(--color-bg-card) 55%)`
-          : "var(--color-bg-card)";
+        el.style.background = "var(--color-bg-card)";
+        el.style.borderColor = "var(--color-border)";
+        el.style.borderTopColor = accent;
       }}
     >
-      {/* Header */}
+      {/* Subtle top glow strip */}
       <div
+        aria-hidden="true"
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          marginBottom: "10px",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "80px",
+          background: `radial-gradient(ellipse at 50% 0%, ${accent}0f 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Card number */}
+      <span
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "24px",
+          fontSize: "12px",
+          fontFamily: "var(--font-mono)",
+          fontWeight: 700,
+          color: `${accent}50`,
+          letterSpacing: "0.08em",
+        }}
+        aria-hidden="true"
+      >
+        {num}
+      </span>
+
+      {/* Emoji */}
+      <span
+        style={{ fontSize: "32px", lineHeight: 1, marginBottom: "16px", display: "block" }}
+        aria-hidden="true"
+      >
+        {category.emoji}
+      </span>
+
+      {/* Title */}
+      <h3
+        style={{
+          fontSize: "18px",
+          fontWeight: 700,
+          fontFamily: "var(--font-display)",
+          color: "var(--color-text)",
+          letterSpacing: "-0.02em",
+          lineHeight: 1.2,
+          marginBottom: "12px",
         }}
       >
-        <span style={{ fontSize: "22px", lineHeight: 1 }} aria-hidden="true">
-          {category.emoji}
-        </span>
-        <h3
-          style={{
-            fontSize: "18px",
-            fontWeight: 700,
-            fontFamily: "var(--font-display)",
-            color: highlighted ? accent : "var(--color-text)",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {category.name}
-        </h3>
-      </div>
+        {category.name}
+      </h3>
 
       {/* Description */}
       <p
@@ -394,7 +230,8 @@ function SkillCard({
           fontSize: "13px",
           lineHeight: 1.75,
           color: "var(--color-text-secondary)",
-          marginBottom: "14px",
+          marginBottom: "20px",
+          flex: 1,
         }}
       >
         {category.description}
@@ -410,11 +247,12 @@ function SkillCard({
               fontSize: "11px",
               fontWeight: 500,
               borderRadius: "100px",
-              background: highlighted ? `${accent}12` : "var(--color-bg)",
-              border: `1px solid ${highlighted ? `${accent}35` : "var(--color-border)"}`,
-              color: highlighted ? accent : "var(--color-text-muted)",
+              background: `${accent}10`,
+              border: `1px solid ${accent}28`,
+              color: accent,
               fontFamily: "var(--font-mono)",
               letterSpacing: "0.02em",
+              transition: "background 0.2s, border-color 0.2s",
             }}
           >
             {item}

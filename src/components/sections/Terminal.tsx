@@ -6,6 +6,18 @@ import { useLanguage } from "@/lib/LanguageContext";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
+
 interface HistoryEntry {
   command: string;
   output: string;
@@ -60,6 +72,7 @@ function colorizeOutput(text: string): React.ReactNode {
 
 export default function Terminal() {
   const { t, lang } = useLanguage();
+  const isMobile = useIsMobile();
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -162,16 +175,17 @@ export default function Terminal() {
     <section id="terminal" className="section-padding bg-bg-secondary">
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         {/* Header */}
-        <ScrollReveal className="text-center mb-16">
+        <ScrollReveal className="text-center mb-10 md:mb-16">
           <SectionLabel text={t.terminal.label} />
           <h2 className="section-title font-display mt-4 mb-4">
             {t.terminal.title}
           </h2>
           <p
             style={{
-              fontSize: "16px",
+              fontSize: "clamp(13px, 2vw, 16px)",
               color: "rgba(255,255,255,0.5)",
               fontFamily: "var(--font-mono)",
+              padding: "0 8px",
             }}
           >
             {t.terminal.hint}
@@ -197,6 +211,7 @@ export default function Terminal() {
             >
               {/* macOS title bar */}
               <div
+                data-terminal="titlebar"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -259,12 +274,14 @@ export default function Terminal() {
                 role="log"
                 aria-live="polite"
                 aria-label="Terminal output"
+                data-terminal="body"
                 style={{
-                  padding: "24px 28px",
-                  height: "440px",
+                  padding: isMobile ? "14px 14px" : "24px 28px",
+                  height: isMobile ? "300px" : "440px",
                   overflowY: "auto",
+                  overflowX: "hidden",
                   fontFamily: "var(--font-mono)",
-                  fontSize: "13.5px",
+                  fontSize: isMobile ? "12px" : "13.5px",
                   lineHeight: "1.75",
                 }}
               >
@@ -288,37 +305,57 @@ export default function Terminal() {
 
                 {/* Command history */}
                 {history.map((entry, i) => (
-                  <div key={i} style={{ marginBottom: "16px" }}>
+                  <div key={i} style={{ marginBottom: "14px" }}>
                     {entry.command && (
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "8px",
+                          gap: isMobile ? "4px" : "8px",
                           marginBottom: "6px",
+                          flexWrap: "nowrap",
+                          overflow: "hidden",
                         }}
                       >
-                        <span
-                          style={{
-                            color: "#22c55e",
-                            fontWeight: 700,
-                            fontSize: "12px",
-                          }}
-                        >
-                          anderson
-                        </span>
-                        <span style={{ color: "rgba(255,255,255,0.2)" }}>@</span>
-                        <span
-                          style={{
-                            color: "#00f0ff",
-                            fontWeight: 600,
-                            fontSize: "12px",
-                          }}
-                        >
-                          portfolio
-                        </span>
-                        <span style={{ color: "rgba(255,255,255,0.2)" }}>~$</span>
-                        <span style={{ color: "#f0f0f0" }}>{entry.command}</span>
+                        {!isMobile && (
+                          <>
+                            <span
+                              style={{
+                                color: "#22c55e",
+                                fontWeight: 700,
+                                fontSize: "12px",
+                                flexShrink: 0,
+                              }}
+                            >
+                              anderson
+                            </span>
+                            <span style={{ color: "rgba(255,255,255,0.2)", flexShrink: 0 }}>@</span>
+                            <span
+                              style={{
+                                color: "#00f0ff",
+                                fontWeight: 600,
+                                fontSize: "12px",
+                                flexShrink: 0,
+                              }}
+                            >
+                              portfolio
+                            </span>
+                          </>
+                        )}
+                        {isMobile && (
+                          <span
+                            style={{
+                              color: "#22c55e",
+                              fontWeight: 700,
+                              fontSize: "11px",
+                              flexShrink: 0,
+                            }}
+                          >
+                            ~
+                          </span>
+                        )}
+                        <span style={{ color: "rgba(255,255,255,0.2)", flexShrink: 0 }}>$</span>
+                        <span style={{ color: "#f0f0f0", wordBreak: "break-word" }}>{entry.command}</span>
                       </div>
                     )}
                     <div
@@ -337,28 +374,46 @@ export default function Terminal() {
 
                 {/* Input line */}
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                  style={{ display: "flex", alignItems: "center", gap: isMobile ? "4px" : "8px" }}
                 >
-                  <span
-                    style={{
-                      color: "#22c55e",
-                      fontWeight: 700,
-                      fontSize: "12px",
-                    }}
-                  >
-                    anderson
-                  </span>
-                  <span style={{ color: "rgba(255,255,255,0.2)" }}>@</span>
-                  <span
-                    style={{
-                      color: "#00f0ff",
-                      fontWeight: 600,
-                      fontSize: "12px",
-                    }}
-                  >
-                    portfolio
-                  </span>
-                  <span style={{ color: "rgba(255,255,255,0.2)" }}>~$</span>
+                  {!isMobile && (
+                    <>
+                      <span
+                        style={{
+                          color: "#22c55e",
+                          fontWeight: 700,
+                          fontSize: "12px",
+                          flexShrink: 0,
+                        }}
+                      >
+                        anderson
+                      </span>
+                      <span style={{ color: "rgba(255,255,255,0.2)", flexShrink: 0 }}>@</span>
+                      <span
+                        style={{
+                          color: "#00f0ff",
+                          fontWeight: 600,
+                          fontSize: "12px",
+                          flexShrink: 0,
+                        }}
+                      >
+                        portfolio
+                      </span>
+                    </>
+                  )}
+                  {isMobile && (
+                    <span
+                      style={{
+                        color: "#22c55e",
+                        fontWeight: 700,
+                        fontSize: "11px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      ~
+                    </span>
+                  )}
+                  <span style={{ color: "rgba(255,255,255,0.2)", flexShrink: 0 }}>$</span>
                   <input
                     ref={inputRef}
                     type="text"
@@ -518,6 +573,67 @@ export default function Terminal() {
               </div>
             </div>
           </div>
+
+          {/* Mobile quick-command chips — horizontal scroll strip, below terminal */}
+          {isMobile && (
+            <div
+              style={{
+                marginTop: "12px",
+                overflowX: "auto",
+                paddingBottom: "4px",
+              }}
+            >
+              <div style={{ display: "flex", gap: "8px", width: "max-content" }}>
+                {quickCommands.map((cmd) => (
+                  <button
+                    key={cmd}
+                    onClick={() => runCommand(cmd)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      padding: "8px 12px",
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "11px",
+                      color: "rgba(255,255,255,0.6)",
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
+                    }}
+                    aria-label={`${lang === "fr" ? "Exécuter" : "Run"}: ${cmd}`}
+                  >
+                    <span style={{ color: "rgba(0,240,255,0.5)", fontSize: "10px" }}>$</span>
+                    {cmd}
+                  </button>
+                ))}
+                <button
+                  onClick={() => runCommand("clear")}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    padding: "8px 12px",
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "11px",
+                    color: "rgba(255,95,87,0.7)",
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
+                  }}
+                  aria-label={lang === "fr" ? "Effacer le terminal" : "Clear terminal"}
+                >
+                  <span style={{ fontSize: "10px" }}>$</span>
+                  clear
+                </button>
+              </div>
+            </div>
+          )}
         </ScrollReveal>
       </div>
     </section>

@@ -110,10 +110,10 @@ export default function Contact() {
           </h2>
           <p
             style={{
-              fontSize: "17px",
+              fontSize: "clamp(14px, 2vw, 17px)",
               color: "rgba(255,255,255,0.55)",
               maxWidth: "500px",
-              margin: "0 auto 48px",
+              margin: "0 auto 32px",
               lineHeight: 1.7,
             }}
           >
@@ -193,12 +193,13 @@ export default function Contact() {
             <motion.div
               whileHover={{ y: -3, boxShadow: "0 24px 64px rgba(0,240,255,0.14)" }}
               transition={{ duration: 0.25 }}
+              data-contact="email-card"
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: "16px",
-                padding: "24px 32px",
+                padding: "24px 28px",
                 background: "rgba(0,240,255,0.04)",
                 border: "1px solid rgba(0,240,255,0.2)",
                 borderRadius: "14px",
@@ -273,10 +274,13 @@ export default function Contact() {
                     Email
                   </div>
                   <div
+                    data-contact="email-text"
                     style={{
-                      fontSize: "17px",
+                      fontSize: "15px",
                       fontWeight: 600,
                       color: "#f0f0f0",
+                      wordBreak: "break-word",
+                      overflowWrap: "anywhere",
                     }}
                   >
                     {t.contact.email}
@@ -286,6 +290,7 @@ export default function Contact() {
 
               {/* Actions — siblings of <a>, not nested inside */}
               <div
+                data-contact="email-actions"
                 style={{
                   display: "flex",
                   alignItems: "center",

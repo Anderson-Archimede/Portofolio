@@ -1,29 +1,38 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 
+// Scroll-progress thresholds at which each dot lights up (0–1 range).
+// With 3 jobs the dots sit at roughly 15%, 50%, 80% of the scroll range.
+const DOT_THRESHOLDS = [0.12, 0.45, 0.78];
+
 export default function Experience() {
   const { t, lang } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start 85%", "end 25%"],
   });
 
-  // Spring-smooth the scroll progress for a fluid line draw
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 60,
     damping: 25,
     restDelta: 0.001,
   });
 
+  // Track progress in state so dot activation re-renders cleanly
+  useMotionValueEvent(smoothProgress, "change", (v) => setProgress(v));
+
   const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
   const tipOpacity = useTransform(smoothProgress, [0, 0.04], [0, 1]);
+
+  const isLit = (i: number) => progress >= DOT_THRESHOLDS[i];
 
   return (
     <section id="experience" ref={sectionRef} className="section-padding">
@@ -91,9 +100,10 @@ export default function Experience() {
           />
 
           {/* Timeline items */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
+          <div className="flex flex-col gap-10 md:gap-16">
             {t.experience.jobs.map((job, i) => (
               <ScrollReveal key={job.company} delay={i * 0.12}>
+
                 {/* Desktop: alternating grid */}
                 <div
                   className="hidden md:grid"
@@ -107,7 +117,7 @@ export default function Experience() {
                     {i % 2 === 0 && <JobCard job={job} isFirst={i === 0} lang={lang} />}
                   </div>
 
-                  {/* Center dot */}
+                  {/* Center dot — lights up as the green line reaches it */}
                   <div
                     style={{
                       display: "flex",
@@ -124,17 +134,17 @@ export default function Experience() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.12 + 0.2 }}
                       style={{
-                        width: i === 0 ? "16px" : "12px",
-                        height: i === 0 ? "16px" : "12px",
+                        width: "14px",
+                        height: "14px",
                         borderRadius: "50%",
-                        background: "var(--color-bg)",
-                        border: `${i === 0 ? "3px" : "2px"} solid #22c55e`,
-                        boxShadow:
-                          i === 0
-                            ? "0 0 16px rgba(34,197,94,0.8), 0 0 32px rgba(34,197,94,0.4)"
-                            : "0 0 8px rgba(34,197,94,0.5), 0 0 16px rgba(34,197,94,0.25)",
                         position: "relative",
                         zIndex: 10,
+                        transition: "background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
+                        background: isLit(i) ? "#22c55e" : "var(--color-bg)",
+                        border: `2px solid ${isLit(i) ? "#22c55e" : "rgba(34,197,94,0.35)"}`,
+                        boxShadow: isLit(i)
+                          ? "0 0 14px rgba(34,197,94,0.9), 0 0 28px rgba(34,197,94,0.5), 0 0 44px rgba(34,197,94,0.2)"
+                          : "none",
                       }}
                     />
                   </div>
@@ -150,18 +160,18 @@ export default function Experience() {
                   <div
                     style={{
                       display: "flex",
-                      gap: "16px",
+                      gap: "12px",
                       alignItems: "flex-start",
                     }}
                   >
-                    {/* Mobile dot + line */}
+                    {/* Mobile dot + connector line */}
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         flexShrink: 0,
-                        marginTop: "28px",
+                        marginTop: "24px",
                       }}
                     >
                       <div
@@ -169,9 +179,12 @@ export default function Experience() {
                           width: "10px",
                           height: "10px",
                           borderRadius: "50%",
-                          background: "var(--color-bg)",
-                          border: "2px solid #22c55e",
-                          boxShadow: "0 0 8px rgba(34,197,94,0.6), 0 0 16px rgba(34,197,94,0.3)",
+                          transition: "background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
+                          background: isLit(i) ? "#22c55e" : "var(--color-bg)",
+                          border: `2px solid ${isLit(i) ? "#22c55e" : "rgba(34,197,94,0.4)"}`,
+                          boxShadow: isLit(i)
+                            ? "0 0 10px rgba(34,197,94,0.9), 0 0 20px rgba(34,197,94,0.4)"
+                            : "none",
                         }}
                       />
                       {i < t.experience.jobs.length - 1 && (
@@ -185,11 +198,12 @@ export default function Experience() {
                         />
                       )}
                     </div>
-                    <div style={{ flex: 1 }}>
-                      <JobCard job={job} isFirst={i === 0} lang={lang} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <JobCard job={job} isFirst={i === 0} lang={lang} mobile />
                     </div>
                   </div>
                 </div>
+
               </ScrollReveal>
             ))}
           </div>
@@ -203,6 +217,7 @@ function JobCard({
   job,
   isFirst,
   lang,
+  mobile = false,
 }: {
   job: {
     company: string;
@@ -214,20 +229,21 @@ function JobCard({
   };
   isFirst: boolean;
   lang: string;
+  mobile?: boolean;
 }) {
   return (
     <div
       className="group"
+      data-card="experience"
       style={{
         background: isFirst
           ? "radial-gradient(ellipse at top left, rgba(34,197,94,0.06) 0%, var(--color-bg-card) 55%)"
           : "var(--color-bg-card)",
         border: "1px solid var(--color-border)",
         borderLeft: isFirst ? "3px solid #22c55e" : "2px solid rgba(34,197,94,0.4)",
-        padding: "28px 32px",
+        padding: mobile ? "18px 16px" : "28px 32px",
         borderRadius: "4px",
-        transition:
-          "border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
+        transition: "border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
         cursor: "default",
       }}
       onMouseEnter={(e) => {
@@ -301,7 +317,7 @@ function JobCard({
       {/* Company */}
       <h3
         style={{
-          fontSize: "20px",
+          fontSize: mobile ? "17px" : "20px",
           fontWeight: 700,
           fontFamily: "var(--font-display)",
           marginBottom: "4px",
@@ -314,7 +330,7 @@ function JobCard({
       {/* Role */}
       <p
         style={{
-          fontSize: "15px",
+          fontSize: mobile ? "13px" : "15px",
           color: "var(--color-text-secondary)",
           marginBottom: "4px",
         }}
@@ -355,7 +371,7 @@ function JobCard({
         {job.location}
       </p>
 
-      {/* Description — context paragraph */}
+      {/* Description */}
       {job.description && (
         <p
           style={{
@@ -386,13 +402,7 @@ function JobCard({
               marginBottom: j < job.highlights.length - 1 ? "10px" : 0,
             }}
           >
-            <span
-              style={{
-                color: "#22c55e",
-                flexShrink: 0,
-                marginTop: "1px",
-              }}
-            >
+            <span style={{ color: "#22c55e", flexShrink: 0, marginTop: "1px" }}>
               →
             </span>
             <span>{h}</span>
