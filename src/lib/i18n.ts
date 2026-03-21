@@ -17,7 +17,7 @@ export const translations = {
       subtitle:
         "Je transforme des données complexes en recommandations stratégiques pour les directions.",
       since: "Data analyst depuis 2022",
-      currently: "Actuellement, Data Analyst @ Malakoff Humanis",
+      currently: "En recherche active · Disponible immédiatement",
       cta: "En savoir plus",
       contact: "Me contacter",
     },
@@ -143,7 +143,7 @@ export const translations = {
           role: "Consultant BI / Business Analyst",
           location: "Orléans, France",
           period: "Déc 2024 — Déc 2025",
-          description: "Aujourd'hui, de nombreuses entreprises possèdent énormément de données, mais manquent de visibilité claire pour piloter leur croissance. Mon rôle de Data Analyst et Consultant BI est précisément de créer ce pont entre la complexité technique des bases de données et les besoins clairs des dirigeants.",
+          description: "Au sein de Malakoff Humanis, j'ai eu pour mission de créer le pont entre la complexité technique des bases de données et les besoins stratégiques des directions Assurance, RH et Commerce.",
           highlights: [
             "Analyser les besoins métiers auprès des directions Assurance, RH et Commerce",
             "Animer des ateliers métiers pour cadrer fonctionnellement les projets et aligner les parties prenantes",
@@ -259,7 +259,7 @@ export const translations = {
       subtitle:
         "I turn complex data into strategic recommendations for executive leadership.",
       since: "Data analyst since 2022",
-      currently: "Currently, Data Analyst @ Malakoff Humanis",
+      currently: "Actively seeking new opportunities · Available immediately",
       cta: "Learn more",
       contact: "Get in touch",
     },
@@ -385,7 +385,7 @@ export const translations = {
           role: "BI Consultant / Business Analyst",
           location: "Orléans, France",
           period: "Dec 2024 — Dec 2025",
-          description: "Today, many companies have enormous amounts of data but lack the clear visibility to drive their growth. My role as a Data Analyst and BI Consultant is precisely to build this bridge between the technical complexity of databases and the clear needs of executives.",
+          description: "At Malakoff Humanis, I was responsible for building the bridge between the technical complexity of databases and the strategic needs of the Insurance, HR and Sales divisions.",
           highlights: [
             "Analyze business needs across Insurance, HR and Sales divisions",
             "Facilitate business workshops to define functional scope and align stakeholders",
