@@ -127,7 +127,7 @@ export default function Hero() {
         >
           <h1 className="crshdn-title font-display">
             <span className="block text-text">{t.hero.greeting}</span>
-            <span className="block text-text">
+            <span className="crshdn-name block text-text">
               {t.hero.name}
               <span style={{ color: "var(--color-accent)" }}>.</span>
             </span>
