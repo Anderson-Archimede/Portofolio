@@ -94,37 +94,51 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Hero badge with pulsing green availability dot */}
+        {/* Role & since — just below profile photo */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mb-6"
+          transition={{ delay: 0.35, duration: 0.6 }}
+          className="mb-8 sm:mb-10 flex flex-col items-center gap-2"
         >
-          <span className="hero-badge">
-            <span
-              style={{
-                display: "inline-block",
-                width: "7px",
-                height: "7px",
-                borderRadius: "50%",
-                background: "#22c55e",
-                boxShadow: "0 0 8px rgba(34,197,94,0.7)",
-                animation: "pulse 2s ease-in-out infinite",
-                flexShrink: 0,
-              }}
-              aria-hidden="true"
-            />
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "9px 22px",
+              background: "var(--color-accent)",
+              color: "var(--color-bg)",
+              fontSize: "clamp(13px, 1.2vw, 16px)",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              borderRadius: "100px",
+              boxShadow: "0 0 24px rgba(0,240,255,0.35)",
+            }}
+          >
             {t.hero.title}
           </span>
+          <p
+            style={{
+              fontSize: "clamp(12px, 1.1vw, 14px)",
+              fontFamily: "var(--font-mono)",
+              color: "var(--color-accent)",
+              opacity: 0.65,
+              letterSpacing: "0.05em",
+            }}
+          >
+            {t.hero.since}
+          </p>
         </motion.div>
 
         {/* MASSIVE title — crshdn style */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-4 w-full"
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12 sm:mb-16 w-full"
         >
           <h1 className="crshdn-title font-display">
             <span className="block text-text">{t.hero.greeting}</span>
@@ -135,53 +149,39 @@ export default function Hero() {
           </h1>
         </motion.div>
 
-        {/* Tagline — improved layout */}
+        {/* Availability status pill */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.75, duration: 0.7 }}
-          className="space-y-3 sm:space-y-4 mt-6 sm:mt-10 w-full"
-          style={{ maxWidth: "560px" }}
+          transition={{ delay: 0.85, duration: 0.6 }}
+          className="mb-8 sm:mb-10"
         >
-          {/* "Since" line */}
-          <p
-            style={{
-              fontSize: "14px",
-              color: "rgba(255,255,255,0.55)",
-              fontFamily: "var(--font-mono)",
-            }}
-          >
-            {t.hero.since}
-          </p>
-
-          {/* "Currently" pill-link — wraps gracefully on mobile */}
           <a
             href="#experience"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              fontSize: "14px",
+              fontSize: "13px",
               color: "rgba(255,255,255,0.7)",
               textDecoration: "none",
-              padding: "8px 14px",
-              borderRadius: "6px",
-              border: "1px solid rgba(255,255,255,0.1)",
+              padding: "9px 16px",
+              borderRadius: "100px",
+              border: "1px solid rgba(255,255,255,0.12)",
               background: "rgba(255,255,255,0.04)",
               transition: "all 0.2s",
               backdropFilter: "blur(8px)",
-              maxWidth: "100%",
-              flexWrap: "wrap",
+              fontFamily: "var(--font-mono)",
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.borderColor = "rgba(0,240,255,0.3)";
-              el.style.color = "#00f0ff";
-              el.style.background = "rgba(0,240,255,0.05)";
+              el.style.borderColor = "rgba(34,197,94,0.4)";
+              el.style.color = "#22c55e";
+              el.style.background = "rgba(34,197,94,0.05)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.borderColor = "rgba(255,255,255,0.1)";
+              el.style.borderColor = "rgba(255,255,255,0.12)";
               el.style.color = "rgba(255,255,255,0.7)";
               el.style.background = "rgba(255,255,255,0.04)";
             }}
@@ -192,30 +192,23 @@ export default function Hero() {
                 height: "7px",
                 borderRadius: "50%",
                 background: "#22c55e",
-                boxShadow: "0 0 8px rgba(34,197,94,0.6)",
+                boxShadow: "0 0 8px rgba(34,197,94,0.7)",
                 flexShrink: 0,
+                animation: "pulse 2s ease-in-out infinite",
               }}
               aria-hidden="true"
             />
-            <span style={{ flex: 1 }}>{t.hero.currently}</span>
-            <svg
-              style={{ width: "13px", height: "13px", opacity: 0.6, flexShrink: 0 }}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
+            {t.hero.currently}
           </a>
+        </motion.div>
 
-          {/* Two CTA buttons — stack on mobile, row on sm+ */}
-          <div className="flex flex-col sm:flex-row gap-3 mt-2 sm:mt-3 sm:justify-center">
+        {/* CTA buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.6 }}
+        >
+          <div className="flex flex-col sm:flex-row gap-3 sm:justify-center">
             <a href="#about" className="btn btn-primary" style={{ justifyContent: "center" }}>
               {t.hero.cta}
             </a>
