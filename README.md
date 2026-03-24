@@ -1,6 +1,8 @@
 # Portfolio — Kouassi Anderson Ehoussou
 
-Site portfolio personnel de **Anderson Kouassi**, Data Analyst & Consultant BI, conçu comme une single-page application statique bilingue (FR/EN).
+Site portfolio personnel d'**Anderson Kouassi**, Analytics Engineer & Data Analyst, conçu comme une single-page application statique bilingue (FR/EN).
+
+**Production** → [portofolio-pi-sand-46.vercel.app](https://portofolio-pi-sand-46.vercel.app)
 
 ---
 
@@ -11,32 +13,24 @@ Site portfolio personnel de **Anderson Kouassi**, Data Analyst & Consultant BI, 
 | Next.js | 15.3.3 | Framework React (export statique) |
 | React | 19.1.0 | UI |
 | TypeScript | 5.8.3 | Typage statique |
-| Tailwind CSS | 4.1.8 | Styles utilitaires |
+| Tailwind CSS | 4.1.8 | Styles utilitaires + variables CSS |
 | Framer Motion | 12.12.1 | Animations et transitions |
+| react-icons/si | 5.6.0 | Icônes de marques (Simple Icons) |
 
 ---
 
 ## Commandes
 
 ```bash
-# Installer les dépendances
-npm install
-
-# Démarrer le serveur de développement (hot reload)
-npm run dev
-
-# Générer le build de production (export statique → /out/)
-npm run build
-
-# Démarrer le serveur de production
-npm run start
-
-# Lancer l'analyse ESLint
-npm run lint
+npm install        # Installer les dépendances
+npm run dev        # Serveur de développement (hot reload)
+npm run build      # Build de production → /out/ (export statique)
+npm run start      # Serveur de production
+npm run lint       # Analyse ESLint
+vercel --prod      # Déploiement Vercel production
 ```
 
-> Le build produit un export HTML statique dans `/out/` (configurable via `next.config.ts`).
-> Aucun serveur Node.js n'est requis en production — le dossier `/out/` peut être hébergé sur n'importe quel CDN ou serveur statique (Vercel, Netlify, GitHub Pages, etc.).
+> Build 100% statique (`output: "export"`). Aucun serveur Node.js requis en production.
 
 ---
 
@@ -44,7 +38,9 @@ npm run lint
 
 ```
 Portofolio/
-├── public/                    # Assets statiques (CV, favicon, images)
+├── public/
+│   ├── images/profile.jpg              # Photo de profil
+│   └── Kouassi Anderson Ehoussou.pdf   # CV téléchargeable
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx           # Page racine — compose toutes les sections
@@ -52,74 +48,88 @@ Portofolio/
 │   │   └── globals.css        # Variables CSS (couleurs, classes typographiques)
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.tsx     # Barre de navigation fixe avec toggle FR/EN
+│   │   │   ├── Navbar.tsx     # Navbar fixe : scroll progress bar, toggle FR/EN, toggle thème
 │   │   │   └── Footer.tsx     # Pied de page
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx       # Section d'accueil (titre, CTA)
-│   │   │   ├── About.tsx      # Présentation + métriques clés
-│   │   │   ├── Skills.tsx     # Grille de compétences (technique + fonctionnel)
-│   │   │   ├── Experience.tsx # Timeline des expériences professionnelles
-│   │   │   ├── Terminal.tsx   # Terminal interactif simulé
-│   │   │   └── Contact.tsx    # Informations de contact + liens
+│   │   │   ├── Hero.tsx       # Accueil : photo, titre massif, subtitle, CTA
+│   │   │   ├── About.tsx      # Présentation narrative + métriques ROI
+│   │   │   ├── Skills.tsx     # Stack technique + certifications + langues
+│   │   │   ├── Experience.tsx # Timeline alternée des expériences pro
+│   │   │   ├── Projects.tsx   # Projets techniques avec stack pills
+│   │   │   ├── Terminal.tsx   # Bento card "Profil en un coup d'œil"
+│   │   │   └── Contact.tsx    # Email copiable, réseaux, téléchargement CV
 │   │   ├── animations/
-│   │   │   └── ScrollReveal.tsx  # Wrapper Framer Motion (whileInView)
+│   │   │   └── ScrollReveal.tsx       # Wrapper Framer Motion (whileInView)
 │   │   └── ui/
-│   │       ├── ParticleCanvas.tsx  # Effet de particules canvas
-│   │       └── SectionLabel.tsx    # Badge label de section
+│   │       ├── ParticleCanvas.tsx     # Anneaux lumineux animés (style crshdn.com)
+│   │       └── SectionLabel.tsx       # Badge label de section
 │   └── lib/
 │       ├── i18n.ts            # Toutes les traductions FR/EN
-│       └── LanguageContext.tsx # Context React + hook useLanguage()
+│       └── LanguageContext.tsx # Context React + hook useLanguage() + thème
 ├── next.config.ts             # Config Next.js (output: "export")
-├── tailwind.config.ts         # Config Tailwind (si applicable)
 └── tsconfig.json              # Config TypeScript
 ```
 
 ---
 
-## Fonctionnalites
+## Fonctionnalités
 
 ### Sections
 
-- **Hero** — Accroche principale avec titre animé, statut de disponibilité, et deux CTA (En savoir plus / Me contacter)
-- **About** — Présentation narrative avec 3 métriques clés : 3,5+ ans d'expérience, 3 secteurs couverts, ~150K EUR de ROI generés
-- **Skills** — Grille de compétences organisée en deux groupes :
-  - *Expertise Technique* : Data Viz & BI, Data Engineering, Cloud & DevOps, Gestion & Méthodo
-  - *Expertise Fonctionnelle* : Business Analysis, Méthodologies & Gestion de projet, SI & Data & Outils
-- **Experience** — Timeline des 3 expériences professionnelles (Malakoff Humanis, Optimum Mobility, Veo Worldwide Services) avec liste de réalisations
-- **Terminal** — Terminal interactif simulé avec les commandes : `help`, `whoami`, `about`, `skills`, `experience`, `education`, `contact`, `clear`
-- **Contact** — Email copiable en un clic, téléphone, liens LinkedIn et GitHub, statistiques, bouton téléchargement CV
+- **Hero** — Photo de profil avec anneau rotatif, titre massif (crshdn-style), subtitle ROI, pill de disponibilité, deux CTA
+- **About** — 3 paragraphes alignés CV + grille de 3 métriques clés (3,5+ ans, 3 secteurs, ~150K€ ROI)
+- **Skills** — 4 cartes de compétences techniques avec icônes de marques (react-icons/si) + 9 certifications avec dates et icônes + langues avec niveaux CECRL
+- **Experience** — Timeline alternée avec ligne de progression verte animée au scroll ; chaque poste : période, société, rôle, lieu, réalisations clés, pills de compétences mobilisées
+- **Projects** — 3 projets techniques avec stack pills et highlight de performance
+- **Terminal (Profil)** — Bento layout : carte identité (photo + badges disponibilité / localisation / mobilité), stats ROI, éducation, stack technique, timeline d'expérience
+- **Contact** — Email avec copie en 1 clic, cards LinkedIn/GitHub/téléphone, téléchargement CV, pill de disponibilité
+
+### Thèmes
+
+Deux thèmes sombres premium, basculables via le toggle Navbar :
+
+| Thème | Fond | Description |
+|---|---|---|
+| **Zinc** (défaut) | `#18181b` | Zinc-dark premium, excellent contraste |
+| **Near-black** (toggle) | `#080808` | Quasi-noir absolu, maximal contrast |
+
+Accents identiques sur les deux thèmes : cyan `#00f0ff`, violet `#a855f7`, rose `#ff6b9d`, vert `#22c55e`.
+
+### ParticleCanvas
+
+Animation canvas entièrement en style **crshdn.com** :
+- Anneaux creux (`ctx.arc` + `ctx.stroke`, fond transparent via `clearRect`)
+- 2 arcs orbitaux cyan très atténués centrés sur la zone photo (~44% viewport)
+- Lignes de connexion courbes (quadratic bezier, opacité variable par distance)
+- Vitesse max 0,45 px/frame, retour élastique ; ~45% des nœuds ont un anneau interne
+
+### Certifications (9)
+
+| Certification | Organisme | Date |
+|---|---|---|
+| Microsoft PL-300 Power BI | Microsoft | En cours 2025 |
+| Dataiku Advanced Designer | Dataiku | Mai 2024 |
+| Dataiku ML Practitioner | Dataiku | Jan 2024 |
+| Dataiku Core Designer | Dataiku | Jan 2024 |
+| Google Analytics | Google | Mar 2024 |
+| Python for Data Science | IBM | Fév 2024 |
+| Data Visualization with R | IBM | Fév 2024 |
+| Hadoop Foundations Level 1 | IBM | Fév 2024 |
+| Introduction to CRM with HubSpot | Coursera | Fév 2024 |
 
 ### Internationalisation (i18n)
 
-Le site est entièrement bilingue **Français / Anglais**.
+Bilingue **Français / Anglais** — toutes les chaînes dans [`src/lib/i18n.ts`](src/lib/i18n.ts).
 
-- Toutes les chaînes de texte sont centralisées dans [`src/lib/i18n.ts`](src/lib/i18n.ts)
-- Le hook `useLanguage()` expose la langue active et la fonction de bascule
+- Le hook `useLanguage()` expose `{ lang, setLang, t, theme, toggleTheme }`
+- Langue et thème persistés dans `localStorage`
 - Le français est la langue par défaut
-- Le toggle de langue est accessible depuis la Navbar
 
-### Animations
+### Accessibilité
 
-- **ScrollReveal** — Révélation au scroll (Framer Motion `whileInView`) appliquée à chaque section
-- **Framer Motion** — Transitions d'entrée, animations de survol sur les cartes de compétences et les boutons
-- **ParticleCanvas** — Effet de particules animées en arrière-plan via Canvas API
-
-### Design
-
-- **Theme sombre** — Fond `#0a0a0a` avec accents violet (`#7c3aed`), cyan (`#06b6d4`) et rose (`#ff6b9d`)
-- **Responsive** — Adapté mobile, tablette et desktop via classes Tailwind
-- **Accessibilité** — Lien "Skip to content" pour la navigation clavier (WCAG 2.4.1), attributs `aria` sur les éléments interactifs
-- **Fonts** — Space Grotesk (titres), Inter (corps), JetBrains Mono (terminal/code) via `next/font/google`
-
-### Alias de chemin
-
-```ts
-// tsconfig.json
-"@/*" → "src/*"
-
-// Exemple
-import { useLanguage } from "@/lib/LanguageContext";
-```
+- Lien "Skip to content" visible au focus (WCAG 2.4.1)
+- Attributs `aria-label`, `aria-current`, `aria-expanded`, `aria-pressed` sur tous les éléments interactifs
+- Focus visible via outline cyan, support `prefers-reduced-motion`
 
 ---
 
@@ -128,28 +138,39 @@ import { useLanguage } from "@/lib/LanguageContext";
 ### Nouvelle section
 
 1. Créer `src/components/sections/MaSection.tsx`
-2. Ajouter les clés de traduction dans les objets `fr` et `en` de `src/lib/i18n.ts`
-3. Importer et positionner le composant dans `src/app/page.tsx`
+2. Ajouter les clés dans `fr` **et** `en` de `src/lib/i18n.ts`
+3. Importer et positionner dans `src/app/page.tsx`
 
-### Nouvelles traductions
+### Nouvelle certification
 
-Toujours ajouter les clés simultanément dans `fr` et `en` dans [`src/lib/i18n.ts`](src/lib/i18n.ts) pour éviter les erreurs TypeScript.
+Dans `src/lib/i18n.ts`, ajouter dans les deux tableaux `certifications` (FR et EN) :
+
+```ts
+{
+  name: "Nom de la certification",
+  org: "Organisme",
+  detail: "Description courte",
+  status: "Obtenu",   // ou "En cours" / "Obtained" / "In progress"
+  color: "#hexcode",  // couleur de marque
+  date: "Mois AAAA",
+}
+```
 
 ---
 
 ## Déploiement
 
-Le site s'exporte en HTML statique via `npm run build`. Le dossier `/out/` généré peut être déployé directement sur :
+```bash
+npm run build   # génère /out/ (export statique)
+vercel --prod   # déploie sur Vercel production
+```
 
-- **Vercel** — connexion GitHub, déploiement automatique
-- **Netlify** — drag & drop du dossier `/out/` ou CI/CD
-- **GitHub Pages** — push du contenu de `/out/` sur la branche `gh-pages`
-- Tout serveur HTTP statique (Apache, Nginx, etc.)
+Chaque push sur `main` déclenche un redéploiement automatique via Vercel CI/CD.
 
 ---
 
 ## Auteur
 
-**Kouassi Anderson Ehoussou**
-Data Analyst & Consultant BI — Paris, France
+**Kouassi Anderson Ehoussou** — Analytics Engineer & Data Analyst
+Paris, France · Mobilité nationale & internationale · Disponible immédiatement
 [linkedin.com/in/kouassi-anderson-ehoussou](https://www.linkedin.com/in/kouassi-anderson-ehoussou) · [github.com/Anderson-Archimede](https://github.com/Anderson-Archimede)
