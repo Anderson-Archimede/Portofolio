@@ -151,6 +151,22 @@ export default function Hero() {
           </h1>
         </motion.div>
 
+        {/* Subtitle — key value proposition */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.6 }}
+          style={{
+            fontSize: "clamp(14px, 1.6vw, 17px)",
+            color: "var(--color-text-secondary)",
+            maxWidth: "600px",
+            lineHeight: 1.8,
+            marginBottom: "32px",
+          }}
+        >
+          {t.hero.subtitle}
+        </motion.p>
+
         {/* Availability status pill */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}

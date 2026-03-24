@@ -26,8 +26,8 @@ export const translations = {
       label: "À propos",
       title: "Mon histoire",
       p1: "Une donnée brute ne prend de la valeur que lorsqu'elle se transforme en décision stratégique.",
-      p2: "Aujourd'hui, de nombreuses entreprises possèdent énormément de données, mais manquent de visibilité claire pour piloter leur croissance. Mon rôle d'Analytics Engineer & Data Analyst est précisément de créer ce pont entre la complexité technique des bases de données et les besoins clairs des dirigeants.",
-      p3: "Avec plus de 3 ans d'expérience (Finance, Assurance, Mobilité), je ne me contente pas de créer de beaux tableaux de bord. Je conçois des écosystèmes analytiques complets — pipelines ELT, modèles dbt, data warehouses — orientés ROI.",
+      p2: "Expert de la Modern Data Stack (dbt, BigQuery/Snowflake) et de la conception de pipelines ELT/ETL (SQL, Python), je suis orienté ROI : -98% de temps de traitement, ~150K$ d'économies générées. Mon rôle est de créer le pont entre la complexité technique des données et les décisions stratégiques des dirigeants.",
+      p3: "Avec 3,5 ans d'expérience en Finance, Assurance et Mobilité, je conçois des écosystèmes analytiques complets — pipelines ELT, modèles dbt dimensionnels (Kimball), data warehouses cloud — garantissant qualité, gouvernance et analyse C-Level.",
       metrics: [
         { value: "3.5+", label: "ans d'expérience" },
         { value: "3", label: "secteurs couverts" },
@@ -230,7 +230,7 @@ export const translations = {
       education: [
         { year: "2025", school: "HETIC", degree: "Master 2 — Data & IA" },
         { year: "2024", school: "ESLSCA Business School", degree: "MBA Data Science" },
-        { year: "2022", school: "Politehnica Bucarest", degree: "Ingénieur Informatique" },
+        { year: "2022", school: "Université Politehnica", degree: "Ingénieur Informatique" },
       ],
     },
     contact: {
@@ -285,8 +285,8 @@ export const translations = {
       label: "About",
       title: "My story",
       p1: "Raw data only gains value when it transforms into a strategic decision.",
-      p2: "Today, many companies have enormous amounts of data but lack the clear visibility to drive their growth. My role as Analytics Engineer & Data Analyst is precisely to build this bridge between the technical complexity of databases and the clear needs of executives.",
-      p3: "With over 3 years of experience across Finance, Insurance, and Mobility, I don't just build beautiful dashboards. I design complete analytical ecosystems — ELT pipelines, dbt models, data warehouses — all ROI-driven.",
+      p2: "Modern Data Stack expert (dbt, BigQuery/Snowflake) and ELT/ETL pipeline architect (SQL, Python), I'm ROI-driven: -98% processing time, ~$150K in savings generated. I build the bridge between technical data complexity and executive-level strategic decisions.",
+      p3: "With 3.5 years across Finance, Insurance, and Mobility, I design complete analytical ecosystems — ELT pipelines, dimensional dbt models (Kimball), cloud data warehouses — ensuring data quality, governance, and C-Level analytics.",
       metrics: [
         { value: "3.5+", label: "years experience" },
         { value: "3", label: "industries" },
@@ -489,7 +489,7 @@ export const translations = {
       education: [
         { year: "2025", school: "HETIC", degree: "Master's — Data & AI" },
         { year: "2024", school: "ESLSCA Business School", degree: "MBA Data Science" },
-        { year: "2022", school: "Politehnica Bucharest", degree: "Computer Engineering" },
+        { year: "2022", school: "Univ. Politehnica", degree: "Computer Engineering" },
       ],
     },
     contact: {
