@@ -54,7 +54,7 @@ export default function Contact() {
       label: "GitHub",
       handle: "Anderson-Archimede",
       href: t.contact.github,
-      color: "#f0f0f0",
+      color: "#6e7681",
       icon: (
         <svg
           width="22"
@@ -111,7 +111,7 @@ export default function Contact() {
           <p
             style={{
               fontSize: "clamp(14px, 2vw, 17px)",
-              color: "rgba(255,255,255,0.55)",
+              color: "var(--color-text-secondary)",
               maxWidth: "500px",
               margin: "0 auto 32px",
               lineHeight: 1.7,
@@ -127,8 +127,8 @@ export default function Contact() {
             className="grid grid-cols-2 sm:grid-cols-4"
             style={{
               gap: "1px",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "var(--color-border)",
+              border: "1px solid var(--color-border)",
               borderRadius: "10px",
               overflow: "hidden",
               marginBottom: "48px",
@@ -140,7 +140,7 @@ export default function Contact() {
                 style={{
                   padding: "20px 16px",
                   textAlign: "center",
-                  background: "rgba(8,8,8,0.8)",
+                  background: "var(--color-bg-card-inner)",
                 }}
               >
                 <div
@@ -161,7 +161,7 @@ export default function Contact() {
                 <div
                   style={{
                     fontSize: "11px",
-                    color: "rgba(255,255,255,0.5)",
+                    color: "var(--color-text-muted)",
                     textTransform: "uppercase",
                     letterSpacing: "1.5px",
                     fontFamily: "var(--font-mono)",
@@ -264,7 +264,7 @@ export default function Contact() {
                   <div
                     style={{
                       fontSize: "12px",
-                      color: "rgba(255,255,255,0.35)",
+                      color: "var(--color-text-muted)",
                       fontFamily: "var(--font-mono)",
                       marginBottom: "4px",
                       textTransform: "uppercase",
@@ -278,7 +278,7 @@ export default function Contact() {
                     style={{
                       fontSize: "15px",
                       fontWeight: 600,
-                      color: "#f0f0f0",
+                      color: "var(--color-text)",
                       wordBreak: "break-word",
                       overflowWrap: "anywhere",
                     }}
@@ -303,9 +303,9 @@ export default function Contact() {
                   style={{
                     padding: "8px 14px",
                     borderRadius: "6px",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    background: "rgba(255,255,255,0.05)",
-                    color: copied ? "#22c55e" : "rgba(255,255,255,0.5)",
+                    border: "1px solid var(--color-border-light)",
+                    background: "var(--color-bg-card)",
+                    color: copied ? "#22c55e" : "var(--color-text-secondary)",
                     fontSize: "12px",
                     fontFamily: "var(--font-mono)",
                     cursor: "pointer",
@@ -366,21 +366,21 @@ export default function Contact() {
                   flexDirection: "column",
                   gap: "12px",
                   padding: "20px",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--color-bg-card)",
+                  border: "1px solid var(--color-border)",
                   borderRadius: "12px",
                   textDecoration: "none",
                   transition: "border-color 0.2s, background 0.2s",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = `${link.color}40`;
+                  el.style.borderColor = `${link.color}60`;
                   el.style.background = `${link.color}08`;
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = "rgba(255,255,255,0.07)";
-                  el.style.background = "rgba(255,255,255,0.02)";
+                  el.style.borderColor = "var(--color-border)";
+                  el.style.background = "var(--color-bg-card)";
                 }}
               >
                 <div style={{ color: link.color, opacity: 0.8 }}>
@@ -391,7 +391,7 @@ export default function Contact() {
                     style={{
                       fontSize: "14px",
                       fontWeight: 600,
-                      color: "#f0f0f0",
+                      color: "var(--color-text)",
                       marginBottom: "3px",
                     }}
                   >
@@ -400,7 +400,7 @@ export default function Contact() {
                   <div
                     style={{
                       fontSize: "12px",
-                      color: "rgba(255,255,255,0.5)",
+                      color: "var(--color-text-secondary)",
                       fontFamily: "var(--font-mono)",
                     }}
                   >
@@ -426,11 +426,11 @@ export default function Contact() {
               gap: "10px",
               width: "100%",
               padding: "14px 24px",
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              background: "var(--color-bg-card)",
+              border: "1px solid var(--color-border-light)",
               borderRadius: "10px",
               textDecoration: "none",
-              color: "rgba(255,255,255,0.55)",
+              color: "var(--color-text-secondary)",
               fontSize: "13px",
               fontFamily: "var(--font-mono)",
               fontWeight: 500,
@@ -440,15 +440,15 @@ export default function Contact() {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.borderColor = "rgba(168,85,247,0.3)";
+              el.style.borderColor = "rgba(168,85,247,0.4)";
               el.style.color = "#a855f7";
-              el.style.background = "rgba(168,85,247,0.05)";
+              el.style.background = "rgba(168,85,247,0.06)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.borderColor = "rgba(255,255,255,0.08)";
-              el.style.color = "rgba(255,255,255,0.55)";
-              el.style.background = "rgba(255,255,255,0.03)";
+              el.style.borderColor = "var(--color-border-light)";
+              el.style.color = "var(--color-text-secondary)";
+              el.style.background = "var(--color-bg-card)";
             }}
           >
             <svg
@@ -477,12 +477,15 @@ export default function Contact() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
+                flexWrap: "wrap",
+                justifyContent: "center",
                 gap: "10px",
                 padding: "10px 20px",
                 borderRadius: "100px",
                 border: "1px solid rgba(34,197,94,0.2)",
                 background: "rgba(34,197,94,0.04)",
                 marginBottom: "12px",
+                maxWidth: "100%",
               }}
             >
               <span
@@ -512,7 +515,7 @@ export default function Contact() {
             <p
               style={{
                 fontSize: "13px",
-                color: "rgba(255,255,255,0.55)",
+                color: "var(--color-text-secondary)",
                 fontFamily: "var(--font-mono)",
               }}
             >

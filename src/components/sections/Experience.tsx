@@ -377,11 +377,11 @@ function JobCard({
           style={{
             fontSize: "13px",
             lineHeight: "1.7",
-            color: "rgba(255,255,255,0.5)",
+            color: "var(--color-text-secondary)",
             fontStyle: "italic",
             marginBottom: "18px",
             paddingBottom: "16px",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            borderBottom: "1px solid var(--color-border)",
           }}
         >
           {job.description}

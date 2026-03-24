@@ -22,8 +22,8 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <About />
-        <Skills />
         <Experience />
+        <Skills />
         <Terminal />
         <Contact />
       </main>

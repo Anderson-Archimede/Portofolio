@@ -72,13 +72,14 @@ export default function About() {
           {/* Key metrics strip */}
           <ScrollReveal delay={0.36}>
             <div
+              data-metrics-grid
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "1px",
                 marginTop: "16px",
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "var(--color-border)",
+                border: "1px solid var(--color-border)",
                 borderRadius: "12px",
                 overflow: "hidden",
               }}
@@ -90,7 +91,7 @@ export default function About() {
                   style={{
                     padding: "20px 16px",
                     textAlign: "center",
-                    background: "rgba(8,8,8,0.7)",
+                    background: "var(--color-bg-card-inner)",
                   }}
                 >
                   <div
@@ -111,7 +112,7 @@ export default function About() {
                   <div
                     style={{
                       fontSize: "10px",
-                      color: "rgba(255,255,255,0.5)",
+                      color: "var(--color-text-muted)",
                       textTransform: "uppercase",
                       letterSpacing: "0.8px",
                       fontFamily: "var(--font-mono)",

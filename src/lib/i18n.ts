@@ -6,7 +6,7 @@ export const translations = {
       about: "À propos",
       skills: "Compétences",
       experience: "Parcours",
-      terminal: "Terminal",
+      terminal: "Profil",
       contact: "Contact",
     },
     hero: {
@@ -193,28 +193,17 @@ export const translations = {
       ],
     },
     terminal: {
-      label: "Terminal",
-      title: "Explore mon profil",
-      hint: "Interagis avec mon profil en ligne de commande",
-      welcome:
-        'Bienvenue dans le terminal d\'Anderson. Tapez "help" pour voir les commandes disponibles.',
-      prompt: "anderson@portfolio",
-      quickAccess: "Raccourcis",
-      commands: {
-        help: "Commandes disponibles : help, whoami, about, skills, experience, education, contact, clear",
-        whoami: "anderson — Data Analyst & Consultant BI\nParis, France · Disponible immédiatement",
-        about:
-          "Nom        : Kouassi Anderson Ehoussou\nRôle       : Data Analyst & Consultant BI\nExpérience : 3,5 ans\nLocalité   : Paris, France\nStatut     : Disponible immédiatement\n\nSpécialiste Power BI/DAX · Pipelines ETL · Machine Learning\n-98% temps de reporting · 150k$ économies générées",
-        skills:
-          "DATA VIZ     → Power BI, Tableau, DAX, Power Query\nDATA ENG     → Python, Pandas, NumPy, Scikit-learn, SQL\nCLOUD        → Azure Data Factory, Azure Synapse, Docker\nGESTION      → Scrum, JIRA, Product Ownership",
-        experience:
-          "2024-2025  Malakoff Humanis     Data Analyst | Business Analyst\n2024       Optimum Mobility    Data Analyst\n2021-2023  Veo Worldwide       Ingénieur Support Data & APO",
-        education:
-          "2025       HETIC               Master 2 Data & IA\n2024       ESLSCA              MBA Data Science\n2022       Politehnica         Ingénieur Informatique",
-        contact:
-          "Email    → andersonkouassi2016@gmail.com\nTél      → +33 745 303 145\nLinkedIn → linkedin.com/in/kouassi-anderson-ehoussou\nGitHub   → github.com/Anderson-Archimede",
-      },
-      notFound: "Commande non reconnue. Tapez 'help' pour la liste des commandes.",
+      label: "Profil",
+      title: "En un coup d'œil",
+      subtitle: "Toutes les infos clés pour vous faire une idée en 30 secondes.",
+      stackLabel: "Stack Technique",
+      expLabel: "Parcours",
+      eduLabel: "Formation",
+      education: [
+        { year: "2025", school: "HETIC", degree: "Master 2 — Data & IA" },
+        { year: "2024", school: "ESLSCA", degree: "MBA Data Science" },
+        { year: "2022", school: "Politehnica", degree: "Ingénieur Informatique" },
+      ],
     },
     contact: {
       label: "Contact",
@@ -248,7 +237,7 @@ export const translations = {
       about: "About",
       skills: "Skills",
       experience: "Experience",
-      terminal: "Terminal",
+      terminal: "Profile",
       contact: "Contact",
     },
     hero: {
@@ -435,28 +424,17 @@ export const translations = {
       ],
     },
     terminal: {
-      label: "Terminal",
-      title: "Explore my profile",
-      hint: "Interact with my profile via command line",
-      welcome:
-        'Welcome to Anderson\'s terminal. Type "help" to see available commands.',
-      prompt: "anderson@portfolio",
-      quickAccess: "Quick access",
-      commands: {
-        help: "Available commands: help, whoami, about, skills, experience, education, contact, clear",
-        whoami: "anderson — Data Analyst & BI Consultant\nParis, France · Available immediately",
-        about:
-          "Name       : Kouassi Anderson Ehoussou\nRole       : Data Analyst & BI Consultant\nExperience : 3.5 years\nLocation   : Paris, France\nStatus     : Available immediately\n\nSpecialist Power BI/DAX · ETL Pipelines · Machine Learning\n-98% reporting time · $150K savings generated",
-        skills:
-          "DATA VIZ     → Power BI, Tableau, DAX, Power Query\nDATA ENG     → Python, Pandas, NumPy, Scikit-learn, SQL\nCLOUD        → Azure Data Factory, Azure Synapse, Docker\nMANAGEMENT   → Scrum, JIRA, Product Ownership",
-        experience:
-          "2024-2025  Malakoff Humanis     Data Analyst | Business Analyst\n2024       Optimum Mobility    Data Analyst\n2021-2023  Veo Worldwide       Data Support Engineer & APO",
-        education:
-          "2025       HETIC               Master's Data & AI\n2024       ESLSCA              MBA Data Science\n2022       Politehnica         Computer Engineering",
-        contact:
-          "Email    → andersonkouassi2016@gmail.com\nPhone    → +33 745 303 145\nLinkedIn → linkedin.com/in/kouassi-anderson-ehoussou\nGitHub   → github.com/Anderson-Archimede",
-      },
-      notFound: "Command not found. Type 'help' for the list of commands.",
+      label: "Profile",
+      title: "At a Glance",
+      subtitle: "All the key info you need in 30 seconds.",
+      stackLabel: "Tech Stack",
+      expLabel: "Experience",
+      eduLabel: "Education",
+      education: [
+        { year: "2025", school: "HETIC", degree: "Master's — Data & AI" },
+        { year: "2024", school: "ESLSCA", degree: "MBA Data Science" },
+        { year: "2022", school: "Politehnica", degree: "Computer Engineering" },
+      ],
     },
     contact: {
       label: "Contact",

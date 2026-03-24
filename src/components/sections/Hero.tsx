@@ -53,18 +53,19 @@ export default function Hero() {
               }}
               aria-hidden="true"
             />
-            {/* Dark mask to separate ring from photo */}
+            {/* Mask to separate ring from photo — adapts to theme */}
             <div
               style={{
                 position: "absolute",
                 inset: "-2px",
                 borderRadius: "50%",
-                background: "#080808",
+                background: "var(--color-bg)",
               }}
               aria-hidden="true"
             />
             {/* Photo container — fills parent div */}
             <div
+              className="hero-photo-frame"
               style={{
                 position: "relative",
                 width: "100%",
@@ -102,6 +103,7 @@ export default function Hero() {
           className="mb-8 sm:mb-10 flex flex-col items-center gap-2"
         >
           <span
+            className="hero-title-badge"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -163,12 +165,12 @@ export default function Hero() {
               alignItems: "center",
               gap: "8px",
               fontSize: "13px",
-              color: "rgba(255,255,255,0.7)",
+              color: "var(--color-text-secondary)",
               textDecoration: "none",
               padding: "9px 16px",
               borderRadius: "100px",
-              border: "1px solid rgba(255,255,255,0.12)",
-              background: "rgba(255,255,255,0.04)",
+              border: "1px solid var(--color-border-light)",
+              background: "var(--color-bg-card)",
               transition: "all 0.2s",
               backdropFilter: "blur(8px)",
               fontFamily: "var(--font-mono)",
@@ -181,9 +183,9 @@ export default function Hero() {
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.borderColor = "rgba(255,255,255,0.12)";
-              el.style.color = "rgba(255,255,255,0.7)";
-              el.style.background = "rgba(255,255,255,0.04)";
+              el.style.borderColor = "var(--color-border-light)";
+              el.style.color = "var(--color-text-secondary)";
+              el.style.background = "var(--color-bg-card)";
             }}
           >
             <span
@@ -208,11 +210,11 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         >
-          <div className="flex flex-col sm:flex-row gap-3 sm:justify-center">
-            <a href="#about" className="btn btn-primary" style={{ justifyContent: "center" }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:justify-center items-stretch sm:items-center">
+            <a href="#about" className="btn btn-primary w-full sm:w-auto" style={{ justifyContent: "center" }}>
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn btn-secondary" style={{ justifyContent: "center" }}>
+            <a href="#contact" className="btn btn-secondary w-full sm:w-auto" style={{ justifyContent: "center" }}>
               {t.hero.contact}
             </a>
           </div>

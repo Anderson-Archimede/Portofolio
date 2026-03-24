@@ -3,11 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
+import type { Theme } from "@/lib/LanguageContext";
 
 const LANG_OPTIONS = ["fr", "en"] as const;
 
 export default function Navbar() {
-  const { lang, setLang, t } = useLanguage();
+  const { lang, setLang, t, theme, toggleTheme } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -68,19 +69,21 @@ export default function Navbar() {
 
   const links = [
     { href: "#about", label: t.nav.about, id: "about" },
-    { href: "#skills", label: t.nav.skills, id: "skills" },
     { href: "#experience", label: t.nav.experience, id: "experience" },
+    { href: "#skills", label: t.nav.skills, id: "skills" },
     { href: "#terminal", label: t.nav.terminal, id: "terminal" },
     { href: "#contact", label: t.nav.contact, id: "contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[rgba(8,8,8,0.92)] backdrop-blur-[28px] border-b border-[rgba(255,255,255,0.06)]"
-          : "bg-[rgba(8,8,8,0.4)] backdrop-blur-[12px]"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled ? "var(--color-bg-overlay)" : "transparent",
+        backdropFilter: scrolled ? "blur(28px)" : "blur(12px)",
+        WebkitBackdropFilter: scrolled ? "blur(28px)" : "blur(12px)",
+        borderBottom: scrolled ? "1px solid var(--color-border)" : "none",
+      }}
       aria-label={lang === "fr" ? "Navigation principale" : "Main navigation"}
     >
       {/* Scroll progress bar */}
@@ -116,15 +119,15 @@ export default function Navbar() {
               className="text-[14px] font-medium tracking-wide transition-colors duration-200 relative py-1"
               aria-current={activeSection === link.id ? "true" : undefined}
               style={{
-                color: activeSection === link.id ? "#ffffff" : "rgba(255,255,255,0.5)",
+                color: activeSection === link.id ? "var(--color-text)" : "var(--color-text-secondary)",
               }}
               onMouseEnter={(e) => {
                 if (activeSection !== link.id)
-                  (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text)";
               }}
               onMouseLeave={(e) => {
                 if (activeSection !== link.id)
-                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text-secondary)";
               }}
             >
               {link.label}
@@ -138,8 +141,11 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Language toggle — segmented pill */}
-        <LangToggle lang={lang} setLang={setLang} />
+        {/* Controls: theme toggle + language toggle */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} lang={lang} />
+          <LangToggle lang={lang} setLang={setLang} theme={theme} />
+        </div>
       </div>
 
       {/* Mobile header */}
@@ -153,7 +159,8 @@ export default function Navbar() {
           AK.
         </a>
         <div className="flex items-center gap-3">
-          <LangToggle lang={lang} setLang={setLang} size="sm" />
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} lang={lang} size="sm" />
+          <LangToggle lang={lang} setLang={setLang} size="sm" theme={theme} />
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center justify-center ml-1 rounded-lg"
@@ -205,7 +212,7 @@ export default function Navbar() {
             transition={{ duration: 0.22, ease: "easeOut" }}
             className="md:hidden border-b border-border overflow-hidden"
             style={{
-              background: "rgba(8,8,8,0.99)",
+              background: "var(--color-bg-overlay)",
               backdropFilter: "blur(32px)",
               WebkitBackdropFilter: "blur(32px)",
             }}
@@ -234,7 +241,7 @@ export default function Navbar() {
                           : "var(--color-text-secondary)",
                       background:
                         activeSection === link.id
-                          ? "rgba(0,240,255,0.06)"
+                          ? "var(--color-accent-glow)"
                           : "transparent",
                       borderLeft:
                         activeSection === link.id
@@ -250,7 +257,7 @@ export default function Navbar() {
               <div
                 style={{
                   padding: "12px 21px 20px",
-                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  borderTop: "1px solid var(--color-border)",
                 }}
               >
                 <a
@@ -270,16 +277,107 @@ export default function Navbar() {
   );
 }
 
+function ThemeToggle({
+  theme,
+  toggleTheme,
+  lang,
+  size = "md",
+}: {
+  theme: Theme;
+  toggleTheme: () => void;
+  lang: string;
+  size?: "sm" | "md";
+}) {
+  const isSmall = size === "sm";
+  const dim = isSmall ? "36px" : "38px";
+  const isDark = theme === "dark";
+
+  return (
+    <motion.button
+      onClick={toggleTheme}
+      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.06 }}
+      transition={{ duration: 0.15 }}
+      style={{
+        width: dim,
+        height: dim,
+        borderRadius: "8px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        border: "1px solid var(--color-border-light)",
+        background: "var(--color-bg-card)",
+        color: "var(--color-text-secondary)",
+        flexShrink: 0,
+        transition: "background 0.2s, border-color 0.2s, color 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLButtonElement;
+        el.style.background = "var(--color-bg-card-hover)";
+        el.style.borderColor = "var(--color-accent)";
+        el.style.color = "var(--color-accent)";
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLButtonElement;
+        el.style.background = "var(--color-bg-card)";
+        el.style.borderColor = "var(--color-border-light)";
+        el.style.color = "var(--color-text-secondary)";
+      }}
+      aria-label={
+        isDark
+          ? lang === "fr" ? "Passer en mode clair" : "Switch to light mode"
+          : lang === "fr" ? "Passer en mode sombre" : "Switch to dark mode"
+      }
+      aria-pressed={!isDark}
+    >
+      <motion.span
+        key={theme}
+        initial={{ rotate: -30, opacity: 0, scale: 0.7 }}
+        animate={{ rotate: 0, opacity: 1, scale: 1 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        {isDark ? (
+          /* Sun icon — shown in dark mode to switch to light */
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+        ) : (
+          /* Moon icon — shown in light mode to switch to dark */
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        )}
+      </motion.span>
+    </motion.button>
+  );
+}
+
 function LangToggle({
   lang,
   setLang,
   size = "md",
+  theme,
 }: {
   lang: string;
   setLang: (l: "fr" | "en") => void;
   size?: "sm" | "md";
+  theme: Theme;
 }) {
   const isSmall = size === "sm";
+  // Hardcoded per-theme so the container is always visibly grey,
+  // regardless of CSS variable resolution order (Tailwind v4 `*` scope issue).
+  const containerBg = theme === "light" ? "#b8bec9" : "#1e1e20";
+  const containerBorder = theme === "light" ? "1px solid #9aa2ae" : "1px solid #2e2e32";
 
   return (
     <div
@@ -289,8 +387,8 @@ function LangToggle({
         display: "inline-flex",
         alignItems: "center",
         gap: "2px",
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.1)",
+        background: containerBg,
+        border: containerBorder,
         borderRadius: "100px",
         padding: "3px",
       }}
@@ -303,12 +401,12 @@ function LangToggle({
             onClick={() => !isActive && setLang(l)}
             animate={{
               background: isActive ? "var(--color-accent)" : "transparent",
-              color: isActive ? "#080808" : "rgba(255,255,255,0.45)",
+              color: isActive ? "var(--color-bg)" : "var(--color-text-secondary)",
             }}
             whileHover={
               isActive
                 ? {}
-                : { color: "rgba(255,255,255,0.85)" }
+                : { color: "var(--color-text)" }
             }
             transition={{ duration: 0.2 }}
             style={{
