@@ -73,10 +73,10 @@ export default function Terminal() {
   const cats = t.skills.categories;
 
   const skillGroups = [
-    { items: cats.dataViz.items, color: SKILL_COLORS[0] },
-    { items: cats.dataEng.items, color: SKILL_COLORS[1] },
-    { items: cats.cloud.items, color: SKILL_COLORS[2] },
-    { items: cats.management.items, color: SKILL_COLORS[3] },
+    { items: cats.analytics.items, color: SKILL_COLORS[0] },
+    { items: cats.databases.items, color: SKILL_COLORS[1] },
+    { items: cats.dataviz.items, color: SKILL_COLORS[2] },
+    { items: cats.devops.items, color: SKILL_COLORS[3] },
   ];
 
   return (
@@ -327,7 +327,7 @@ export default function Terminal() {
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 {skillGroups.map((group, gi) => (
                   <div key={gi} style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                    {group.items.map((item) => (
+                    {group.items.map((item: string) => (
                       <Pill key={item} label={item} color={group.color} />
                     ))}
                   </div>

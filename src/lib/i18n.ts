@@ -6,6 +6,7 @@ export const translations = {
       about: "À propos",
       skills: "Compétences",
       experience: "Parcours",
+      projects: "Projets",
       terminal: "Profil",
       contact: "Contact",
     },
@@ -13,10 +14,10 @@ export const translations = {
       greeting: "Salut, je suis",
       name: "Anderson Kouassi",
       fullName: "Kouassi Anderson Ehoussou",
-      title: "Data Analyst & Consultant BI",
+      title: "Analytics Engineer & Data Analyst",
       subtitle:
-        "Je transforme des données complexes en recommandations stratégiques pour les directions.",
-      since: "Data analyst depuis 2022",
+        "Expert de la Modern Data Stack (dbt, BigQuery/Snowflake). Je transforme des données brutes en modèles analytiques robustes et orientés ROI.",
+      since: "Data analyst depuis 2021",
       currently: "En recherche active · Disponible immédiatement",
       cta: "En savoir plus",
       contact: "Me contacter",
@@ -25,8 +26,8 @@ export const translations = {
       label: "À propos",
       title: "Mon histoire",
       p1: "Une donnée brute ne prend de la valeur que lorsqu'elle se transforme en décision stratégique.",
-      p2: "Aujourd'hui, de nombreuses entreprises possèdent énormément de données, mais manquent de visibilité claire pour piloter leur croissance. Mon rôle de Data Analyst et Consultant BI est précisément de créer ce pont entre la complexité technique des bases de données et les besoins clairs des dirigeants.",
-      p3: "Avec plus de 3 ans d'expérience (Finance, Assurance, Mobilité), je ne me contente pas de créer de beaux tableaux de bord. Je conçois des écosystèmes analytiques complets orientés ROI.",
+      p2: "Aujourd'hui, de nombreuses entreprises possèdent énormément de données, mais manquent de visibilité claire pour piloter leur croissance. Mon rôle d'Analytics Engineer & Data Analyst est précisément de créer ce pont entre la complexité technique des bases de données et les besoins clairs des dirigeants.",
+      p3: "Avec plus de 3 ans d'expérience (Finance, Assurance, Mobilité), je ne me contente pas de créer de beaux tableaux de bord. Je conçois des écosystèmes analytiques complets — pipelines ELT, modèles dbt, data warehouses — orientés ROI.",
       metrics: [
         { value: "3.5+", label: "ans d'expérience" },
         { value: "3", label: "secteurs couverts" },
@@ -36,103 +37,80 @@ export const translations = {
     skills: {
       label: "Compétences",
       title: "Mon expertise",
-      groupTech: "Expertise Technique",
-      groupFunc: "Expertise Fonctionnelle",
+      groupTech: "Stack Technique",
+      groupFunc: "Certifications & Langues",
       categories: {
-        dataViz: {
-          name: "Data Viz & BI",
-          emoji: "📊",
+        analytics: {
+          name: "Analytics & Data Engineering",
+          emoji: "🔧",
           description:
-            "Transformation de données brutes en dashboards Power BI percutants, avec modélisation sémantique et optimisation DAX pour des KPIs stratégiques.",
+            "Modern Data Stack : dbt, orchestration Airflow, pipelines ELT/ETL et modélisation dimensionnelle (Kimball, Data Vault) pour des données fiables et gouvernées.",
           items: [
-            "Power BI",
-            "Tableau",
-            "DAX",
-            "Power Query",
-            "Modélisation en étoile",
-          ],
-        },
-        dataEng: {
-          name: "Data Engineering",
-          emoji: "⚙️",
-          description:
-            "Construction de pipelines ETL robustes avec Python, SQL optimisé et orchestration de flux de données via Azure Data Factory.",
-          items: [
+            "dbt (Data Build Tool)",
+            "Apache Airflow",
+            "ETL / ELT",
+            "Kimball / Data Vault",
             "Python",
             "Pandas",
             "NumPy",
-            "Scikit-learn",
-            "SQL Avancé",
-            "SQL Server",
           ],
         },
-        cloud: {
-          name: "Cloud & DevOps",
-          emoji: "☁️",
+        databases: {
+          name: "Bases de données & Cloud",
+          emoji: "🗄️",
           description:
-            "Déploiement de solutions data sur Azure (Synapse, ADF), conteneurisation Docker et gestion de versions Git.",
+            "Requêtes SQL avancées et conception de data warehouses sur les plateformes cloud modernes (BigQuery, Snowflake, Azure).",
           items: [
-            "Azure Data Factory",
+            "Google BigQuery",
+            "Snowflake",
             "Azure Synapse",
+            "SQL Server",
+            "PostgreSQL",
+            "SQL Avancé",
+          ],
+        },
+        dataviz: {
+          name: "Data Viz & BI",
+          emoji: "📊",
+          description:
+            "Dashboards Power BI percutants avec optimisation DAX, Tableau pour l'analytique visuelle et outils BI open-source (Looker, Metabase).",
+          items: ["Power BI", "DAX", "Tableau", "Looker", "Metabase"],
+        },
+        devops: {
+          name: "DevOps, Outils & Gestion",
+          emoji: "⚙️",
+          description:
+            "CI/CD avec Git/GitHub, conteneurisation Docker, pilotage de projet Agile/Scrum et contrôle qualité des données.",
+          items: [
+            "Git / GitHub CI/CD",
             "Docker",
-            "Git",
-            "API REST",
-          ],
-        },
-        management: {
-          name: "Gestion & Méthodo",
-          emoji: "🎯",
-          description:
-            "Coordination Agile/Scrum, Product Ownership et storytelling data pour aligner équipes techniques et métier.",
-          items: [
-            "Scrum / Agile",
             "JIRA",
-            "Product Ownership",
-            "Storytelling Data",
-          ],
-        },
-        businessAnalysis: {
-          name: "Business Analysis & Fonctionnel",
-          emoji: "🔍",
-          description:
-            "Recueil et formalisation des besoins métiers, animation d'ateliers, rédaction de spécifications fonctionnelles et pilotage de la recette.",
-          items: [
-            "Analyse & formalisation des besoins",
-            "Animation d'ateliers métiers",
-            "Spécifications fonctionnelles",
-            "Rédaction de user stories",
-            "Alimentation du backlog",
-            "Participation aux comités projet",
-            "Stratégie de tests & recette",
-          ],
-        },
-        methodology: {
-          name: "Méthodologies & Gestion de projet",
-          emoji: "⚡",
-          description:
-            "Maîtrise des méthodologies Agile et cycle en V pour coordonner efficacement équipes métiers et techniques.",
-          items: [
-            "Agile : Scrum & Kanban",
-            "Cycle en V",
-            "Cérémonies agiles",
-            "Coordination métiers / technique",
-          ],
-        },
-        tools: {
-          name: "SI & Data & Outils",
-          emoji: "🛠️",
-          description:
-            "Maîtrise des outils clés de la chaîne data et du SI pour assurer la cohérence entre besoins fonctionnels et solutions techniques.",
-          items: [
-            "Power BI",
-            "SQL",
-            "ETL & intégration de données",
-            "Jira",
-            "Confluence",
-            "Git",
+            "Agile / Scrum",
+            "Data Quality",
           ],
         },
       },
+      certifications: [
+        {
+          name: "Microsoft PL-300",
+          org: "Microsoft",
+          detail: "Power BI Data Analyst",
+          status: "En cours",
+          color: "#0078d4",
+        },
+        {
+          name: "Dataiku ML Practitioner",
+          org: "Dataiku",
+          detail: "Machine Learning",
+          status: "Obtenu",
+          color: "#e05c00",
+        },
+      ],
+      languages: [
+        { lang: "Français", level: "C2", native: true },
+        { lang: "Anglais", level: "B2", native: false },
+        { lang: "Roumain", level: "C1", native: false },
+      ],
     },
     experience: {
       label: "Parcours",
@@ -140,55 +118,74 @@ export const translations = {
       jobs: [
         {
           company: "Malakoff Humanis",
-          role: "Consultant BI / Business Analyst",
+          role: "Data Analyst & Analytics Engineer",
           location: "Orléans, France",
           period: "Déc 2024 — Déc 2025",
-          description: "Au sein de Malakoff Humanis, j'ai eu pour mission de créer le pont entre la complexité technique des bases de données et les besoins stratégiques des directions Assurance, RH et Commerce.",
+          description:
+            "Conception et déploiement de solutions analytiques end-to-end pour standardiser les KPI de 3 business units et accélérer la prise de décision.",
           highlights: [
-            "Analyser les besoins métiers auprès des directions Assurance, RH et Commerce",
-            "Animer des ateliers métiers pour cadrer fonctionnellement les projets et aligner les parties prenantes",
-            "Rédaction de spécifications fonctionnelles, règles de gestion et supports métiers",
-            "Rédaction de user stories et contribution à l'alimentation du backlog",
-            "Accompagnement des équipes techniques dans la compréhension des besoins fonctionnels",
-            "Participation aux comités de suivi projet et aux cérémonies agiles",
-            "Piloter la qualité des données et fiabiliser les indicateurs de reporting BI",
-            "Collaborer avec les équipes data pour modéliser les données et optimiser les flux décisionnels",
-            "Identifier les axes d’amélioration et proposer des solutions orientées performance et valeur métier",
-            "Contribution à la stratégie de recette fonctionnelle et validation des livrables",
+            "Conçu des modèles de données analytiques et un modèle sémantique Power BI centralisé, standardisant les KPI pour 3 business units et éliminant 70% des divergences d'interprétation.",
+            "Piloté des pipelines d'intégration ELT via Azure Data Factory, automatisant l'alimentation des data marts et réduisant le temps de prise de décision de 40%.",
+            "Optimisé le code SQL/DAX et implémenté des pratiques de modélisation en étoile, améliorant les performances de rafraîchissement de 50% et la scalabilité des rapports.",
           ],
         },
         {
           company: "Optimum Mobility",
-          role: "Data Analyst (Stage)",
+          role: "Data Engineer & Analyst",
           location: "Paris, France",
           period: "Juil 2024 — Sep 2024",
-          description: "Avec une bonne expérience en (Finance, Assurance, Mobilité), je ne me contente pas de créer de beaux tableaux de bord. Je conçois des écosystèmes analytiques complets orientés ROI.",
+          description:
+            "Développement de pipelines ETL et analyses SQL avancées pour segmenter les clients et propulser des campagnes marketing à fort ROI.",
           highlights: [
-            "Analyse des besoins fonctionnels et analytiques des équipes métiers",
-            "Rédaction des exigences fonctionnelles pour les solutions data",
-            "Définition et validation des indicateurs de performance",
-            "Contribution aux campagnes de tests fonctionnels et à la recette",
-            "Mise en place des scripts d'automatisation pour les taches repetitif (Zapier)",
-            "Développement de scripts Python (Pandas, NumPy) pour le traitement de datasets",
-            "Études statistiques et analyses comportementales sur données clients",
-            "Amélioration des délais de livraison des données (-30%)",
+            "Développé des pipelines ETL en Python (Pandas) et scripts de Web Scraping (BeautifulSoup/Selenium) ingérant plus de 10 000 données/jour avec un taux de fiabilité de 99,8%.",
+            "Identifié 3 segments de clients clés via des requêtes SQL avancées, propulsant 5 campagnes marketing ciblées générant un ROI de +280%.",
+            "Automatisé l'intégration de données multi-sources (API REST, Google Analytics) via des flux programmés, réduisant de 30% le temps de préparation manuelle des données.",
           ],
         },
         {
           company: "Veo Worldwide Services",
-          role: "Ingénieur Support Applicatif Data & Assistant Product Owner",
+          role: "Data Engineer Support & Assistant Product Owner",
           location: "Bucarest, Roumanie",
           period: "Sep 2021 — Déc 2023",
-          description: "Une donnée brute ne prend de la valeur que lorsqu'elle se transforme en décision stratégique. C'est dans ce premier rôle que j'ai forgé cette conviction, en optimisant des processus SQL critiques et en coordonnant des sprints Scrum à fort impact.",
+          description:
+            "Optimisation de procédures SQL critiques, automatisation Python et coordination de 12 sprints Scrum à fort impact sur la qualité des données.",
           highlights: [
-            "Support fonctionnel auprès des utilisateurs métiers",
-            "Analyse des incidents et besoins d'évolution fonctionnelle",
-            "Participation à l'amélioration continue des solutions existantes",
-            "Collaboration étroite avec les équipes techniques et data",
-            "Gestion et optimisation de bases de données SQL (requêtes complexes, indexation)",
-            "Support technique niveau L2/L3 et résolution et remonté d'incidents (Jira, GLPI)",
-            "Rédaction de documentation technique et amélioration des applications data",
+            "Optimisé plus de 20 procédures stockées SQL Server, réduisant les délais de latence de 35% et générant ~150 000$ d'économies annuelles d'infrastructure.",
+            "Automatisé l'extraction et la transformation de données (Python, VBA) pour le reporting opérationnel, réduisant les interventions manuelles de 60%.",
+            "Coordonné 12 sprints Scrum (JIRA) garantissant un taux de complétion de 92% pour plus de 80 user stories liées à l'architecture data.",
           ],
+        },
+      ],
+    },
+    projects: {
+      label: "Projets",
+      title: "Projets Techniques",
+      subtitle:
+        "Réalisations concrètes illustrant ma maîtrise de la Modern Data Stack.",
+      list: [
+        {
+          title: "Modern Data Stack & Modélisation Analytique",
+          year: "2025",
+          description:
+            "Transformation de données brutes en modèles analytiques (Staging, Intermediate, Marts) avec implémentation de tests de qualité des données (Data Quality).",
+          stack: ["dbt", "Google BigQuery", "SQL", "Git"],
+          highlight: "-98% temps de traitement",
+        },
+        {
+          title: "Pipeline ETL Automatisé Conteneurisé",
+          year: "2024",
+          description:
+            "Workflow d'ingestion et de nettoyage quotidien de milliers d'enregistrements (99,8% de succès), déployé via CI/CD Docker.",
+          stack: ["Python", "Docker", "Apache Airflow", "API REST"],
+          highlight: "99,8% fiabilité",
+        },
+        {
+          title: "Dashboard Power BI & Data Warehouse",
+          year: "2024",
+          description:
+            "Réduction du temps de reporting financier de 98% (90 min → 4 min) via la refonte complète du modèle de données sous-jacent.",
+          stack: ["SQL Server", "Power BI", "DAX"],
+          highlight: "-98% temps de reporting",
         },
       ],
     },
@@ -201,8 +198,8 @@ export const translations = {
       eduLabel: "Formation",
       education: [
         { year: "2025", school: "HETIC", degree: "Master 2 — Data & IA" },
-        { year: "2024", school: "ESLSCA", degree: "MBA Data Science" },
-        { year: "2022", school: "Politehnica", degree: "Ingénieur Informatique" },
+        { year: "2024", school: "ESLSCA Business School", degree: "MBA Data Science" },
+        { year: "2022", school: "Politehnica Bucarest", degree: "Ingénieur Informatique" },
       ],
     },
     contact: {
@@ -237,6 +234,7 @@ export const translations = {
       about: "About",
       skills: "Skills",
       experience: "Experience",
+      projects: "Projects",
       terminal: "Profile",
       contact: "Contact",
     },
@@ -244,10 +242,10 @@ export const translations = {
       greeting: "Hi there, I'm",
       name: "Anderson Kouassi",
       fullName: "Kouassi Anderson Ehoussou",
-      title: "Data Analyst & BI Consultant",
+      title: "Analytics Engineer & Data Analyst",
       subtitle:
-        "I turn complex data into strategic recommendations for executive leadership.",
-      since: "Data analyst since 2022",
+        "Modern Data Stack expert (dbt, BigQuery/Snowflake). I turn raw data into robust, ROI-driven analytical models.",
+      since: "Data analyst since 2021",
       currently: "Actively seeking new opportunities · Available immediately",
       cta: "Learn more",
       contact: "Get in touch",
@@ -256,8 +254,8 @@ export const translations = {
       label: "About",
       title: "My story",
       p1: "Raw data only gains value when it transforms into a strategic decision.",
-      p2: "Today, many companies have enormous amounts of data but lack the clear visibility to drive their growth. My role as a Data Analyst and BI Consultant is precisely to build this bridge between the technical complexity of databases and the clear needs of executives.",
-      p3: "With over 3 years of experience across Finance, Insurance, and Mobility, I don't just build beautiful dashboards. I design complete, ROI-driven analytical ecosystems.",
+      p2: "Today, many companies have enormous amounts of data but lack the clear visibility to drive their growth. My role as Analytics Engineer & Data Analyst is precisely to build this bridge between the technical complexity of databases and the clear needs of executives.",
+      p3: "With over 3 years of experience across Finance, Insurance, and Mobility, I don't just build beautiful dashboards. I design complete analytical ecosystems — ELT pipelines, dbt models, data warehouses — all ROI-driven.",
       metrics: [
         { value: "3.5+", label: "years experience" },
         { value: "3", label: "industries" },
@@ -267,103 +265,80 @@ export const translations = {
     skills: {
       label: "Skills",
       title: "My expertise",
-      groupTech: "Technical Expertise",
-      groupFunc: "Functional Expertise",
+      groupTech: "Tech Stack",
+      groupFunc: "Certifications & Languages",
       categories: {
-        dataViz: {
-          name: "Data Viz & BI",
-          emoji: "📊",
+        analytics: {
+          name: "Analytics & Data Engineering",
+          emoji: "🔧",
           description:
-            "Turning raw data into impactful Power BI dashboards with semantic modeling and DAX optimization for real-time strategic KPIs.",
+            "Modern Data Stack: dbt, Airflow orchestration, ELT/ETL pipelines and dimensional modeling (Kimball, Data Vault) for reliable, governed data.",
           items: [
-            "Power BI",
-            "Tableau",
-            "DAX",
-            "Power Query",
-            "Star Schema Modeling",
-          ],
-        },
-        dataEng: {
-          name: "Data Engineering",
-          emoji: "⚙️",
-          description:
-            "Building robust ETL pipelines with Python, optimized SQL, and data flow orchestration via Azure Data Factory.",
-          items: [
+            "dbt (Data Build Tool)",
+            "Apache Airflow",
+            "ETL / ELT",
+            "Kimball / Data Vault",
             "Python",
             "Pandas",
             "NumPy",
-            "Scikit-learn",
-            "Advanced SQL",
-            "SQL Server",
           ],
         },
-        cloud: {
-          name: "Cloud & DevOps",
-          emoji: "☁️",
+        databases: {
+          name: "Databases & Cloud",
+          emoji: "🗄️",
           description:
-            "Deploying data solutions on Azure (Synapse, ADF), Docker containerization, and Git version control.",
+            "Advanced SQL queries and data warehouse design on modern cloud platforms (BigQuery, Snowflake, Azure).",
           items: [
-            "Azure Data Factory",
+            "Google BigQuery",
+            "Snowflake",
             "Azure Synapse",
+            "SQL Server",
+            "PostgreSQL",
+            "Advanced SQL",
+          ],
+        },
+        dataviz: {
+          name: "Data Viz & BI",
+          emoji: "📊",
+          description:
+            "Impactful Power BI dashboards with DAX optimization, Tableau for visual analytics, and open-source BI tools (Looker, Metabase).",
+          items: ["Power BI", "DAX", "Tableau", "Looker", "Metabase"],
+        },
+        devops: {
+          name: "DevOps, Tools & Management",
+          emoji: "⚙️",
+          description:
+            "CI/CD with Git/GitHub, Docker containerization, Agile/Scrum project management and data quality control.",
+          items: [
+            "Git / GitHub CI/CD",
             "Docker",
-            "Git",
-            "REST APIs",
-          ],
-        },
-        management: {
-          name: "Management & Methods",
-          emoji: "🎯",
-          description:
-            "Agile/Scrum coordination, Product Ownership and data storytelling to align technical and business teams.",
-          items: [
-            "Scrum / Agile",
             "JIRA",
-            "Product Ownership",
-            "Data Storytelling",
-          ],
-        },
-        businessAnalysis: {
-          name: "Business Analysis & Functional",
-          emoji: "🔍",
-          description:
-            "Requirements gathering and formalization, workshop facilitation, functional specifications writing, and acceptance testing coordination.",
-          items: [
-            "Requirements analysis",
-            "Business workshop facilitation",
-            "Functional specifications",
-            "User stories writing",
-            "Backlog management",
-            "Project steering committees",
-            "Test strategy & acceptance",
-          ],
-        },
-        methodology: {
-          name: "Methodologies & Project Management",
-          emoji: "⚡",
-          description:
-            "Proficient in Agile and Waterfall methodologies to effectively coordinate business and technical teams.",
-          items: [
-            "Agile: Scrum & Kanban",
-            "Waterfall / V-cycle",
-            "Agile ceremonies",
-            "Business / tech coordination",
-          ],
-        },
-        tools: {
-          name: "IS & Data & Tools",
-          emoji: "🛠️",
-          description:
-            "Command of key data and IS tools to ensure alignment between functional needs and technical solutions.",
-          items: [
-            "Power BI",
-            "SQL",
-            "ETL & data integration",
-            "Jira",
-            "Confluence",
-            "Git",
+            "Agile / Scrum",
+            "Data Quality",
           ],
         },
       },
+      certifications: [
+        {
+          name: "Microsoft PL-300",
+          org: "Microsoft",
+          detail: "Power BI Data Analyst",
+          status: "In progress",
+          color: "#0078d4",
+        },
+        {
+          name: "Dataiku ML Practitioner",
+          org: "Dataiku",
+          detail: "Machine Learning",
+          status: "Obtained",
+          color: "#e05c00",
+        },
+      ],
+      languages: [
+        { lang: "French", level: "C2", native: true },
+        { lang: "English", level: "B2", native: false },
+        { lang: "Romanian", level: "C1", native: false },
+      ],
     },
     experience: {
       label: "Experience",
@@ -371,55 +346,74 @@ export const translations = {
       jobs: [
         {
           company: "Malakoff Humanis",
-          role: "BI Consultant / Business Analyst",
+          role: "Data Analyst & Analytics Engineer",
           location: "Orléans, France",
           period: "Dec 2024 — Dec 2025",
-          description: "At Malakoff Humanis, I was responsible for building the bridge between the technical complexity of databases and the strategic needs of the Insurance, HR and Sales divisions.",
+          description:
+            "End-to-end analytical solution design and deployment to standardize KPIs across 3 business units and accelerate decision-making.",
           highlights: [
-            "Analyze business needs across Insurance, HR and Sales divisions",
-            "Facilitate business workshops to define functional scope and align stakeholders",
-            "Writing functional specifications, business rules and support materials",
-            "Writing user stories and contributing to backlog refinement",
-            "Supporting technical teams in understanding functional requirements",
-            "Participating in project steering committees and agile ceremonies",
-            "Drive data quality and ensure reliability of BI reporting indicators",
-            "Collaborate with data teams to model data and optimize decision-making flows",
-            "Identify improvement areas and propose solutions focused on performance and business value",
-            "Contributing to functional acceptance strategy and deliverable validation",
+            "Designed analytical data models and a centralized Power BI semantic model, standardizing KPIs for 3 business units and eliminating 70% of interpretation discrepancies.",
+            "Led ELT integration pipelines via Azure Data Factory, automating data mart feeding and reducing decision-making time by 40%.",
+            "Optimized SQL/DAX code and implemented star schema modeling best practices, improving refresh performance by 50% and report scalability.",
           ],
         },
         {
           company: "Optimum Mobility",
-          role: "Data Analyst (Internship)",
+          role: "Data Engineer & Analyst",
           location: "Paris, France",
           period: "Jul 2024 — Sep 2024",
-          description: "With solid experience across Finance, Insurance, and Mobility, I don't just build beautiful dashboards. I design complete, ROI-driven analytical ecosystems.",
+          description:
+            "ETL pipeline development and advanced SQL analysis to segment customers and drive high-ROI marketing campaigns.",
           highlights: [
-            "Functional and analytical requirements gathering from business teams",
-            "Writing functional requirements for data solutions",
-            "Definition and validation of performance indicators",
-            "Contribution to functional test campaigns and acceptance testing",
-            "Implement automation scripts for repetitive tasks (Zapier)",
-            "Develop Python scripts (Pandas, NumPy) for dataset processing",
-            "Statistical studies and behavioral analyses on customer data",
-            "Improved data delivery timelines by 30%",
+            "Developed ETL pipelines in Python (Pandas) and Web Scraping scripts (BeautifulSoup/Selenium) ingesting 10,000+ records/day with 99.8% reliability.",
+            "Identified 3 key customer segments via advanced SQL queries, powering 5 targeted marketing campaigns generating +280% ROI.",
+            "Automated multi-source data integration (REST API, Google Analytics) via scheduled flows, reducing manual data preparation time by 30%.",
           ],
         },
         {
           company: "Veo Worldwide Services",
-          role: "Data Application Support Engineer & Assistant Product Owner",
+          role: "Data Engineer Support & Assistant Product Owner",
           location: "Bucharest, Romania",
           period: "Sep 2021 — Dec 2023",
-          description: "Raw data only gains value when it transforms into a strategic decision. It was in this first role that I built this conviction — optimizing critical SQL processes and coordinating high-impact Scrum sprints.",
+          description:
+            "Critical SQL procedure optimization, Python automation, and coordination of 12 Scrum sprints with high impact on data quality.",
           highlights: [
-            "Functional support for business users",
-            "Incident analysis and functional improvement requirements",
-            "Participation in continuous improvement of existing solutions",
-            "Close collaboration with technical and data teams",
-            "SQL database management and optimization (complex queries, indexing)",
-            "L2/L3 technical support and incident resolution and escalation (Jira, GLPI)",
-            "Technical documentation writing and data application improvement",
+            "Optimized 20+ SQL Server stored procedures, reducing latency by 35% and generating ~$150K in annual infrastructure savings.",
+            "Automated data extraction and transformation (Python, VBA) for operational reporting, reducing manual interventions by 60%.",
+            "Coordinated 12 Scrum sprints (JIRA) achieving 92% completion rate for 80+ user stories related to data architecture and quality.",
           ],
+        },
+      ],
+    },
+    projects: {
+      label: "Projects",
+      title: "Technical Projects",
+      subtitle:
+        "Hands-on work showcasing my mastery of the Modern Data Stack.",
+      list: [
+        {
+          title: "Modern Data Stack & Analytical Modeling",
+          year: "2025",
+          description:
+            "Transformed raw data into analytical models (Staging, Intermediate, Marts) with data quality testing implementation.",
+          stack: ["dbt", "Google BigQuery", "SQL", "Git"],
+          highlight: "-98% processing time",
+        },
+        {
+          title: "Containerized Automated ETL Pipeline",
+          year: "2024",
+          description:
+            "Daily ingestion and cleaning workflow for thousands of records (99.8% success rate), deployed via CI/CD Docker.",
+          stack: ["Python", "Docker", "Apache Airflow", "REST API"],
+          highlight: "99.8% reliability",
+        },
+        {
+          title: "Power BI Dashboard & Data Warehouse",
+          year: "2024",
+          description:
+            "Reduced financial reporting time by 98% (90 min → 4 min) through a complete data model redesign.",
+          stack: ["SQL Server", "Power BI", "DAX"],
+          highlight: "-98% reporting time",
         },
       ],
     },
@@ -432,8 +426,8 @@ export const translations = {
       eduLabel: "Education",
       education: [
         { year: "2025", school: "HETIC", degree: "Master's — Data & AI" },
-        { year: "2024", school: "ESLSCA", degree: "MBA Data Science" },
-        { year: "2022", school: "Politehnica", degree: "Computer Engineering" },
+        { year: "2024", school: "ESLSCA Business School", degree: "MBA Data Science" },
+        { year: "2022", school: "Politehnica Bucharest", degree: "Computer Engineering" },
       ],
     },
     contact: {

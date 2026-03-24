@@ -1,70 +1,108 @@
 "use client";
 
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
+import {
+  SiDbt,
+  SiApacheairflow,
+  SiPython,
+  SiPandas,
+  SiNumpy,
+  SiGooglebigquery,
+  SiSnowflake,
+  SiPostgresql,
+  SiLooker,
+  SiMetabase,
+  SiGit,
+  SiDocker,
+  SiJira,
+  SiDataiku,
+} from "react-icons/si";
+import type { IconType } from "react-icons";
 import { useLanguage } from "@/lib/LanguageContext";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
 
-/* ─── SVG icon map — one per category key, stroke-based 22×22 ─── */
-const CATEGORY_ICONS: Record<string, ReactNode> = {
-  // Bar chart — Data Viz & BI
-  dataViz: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="12" width="4" height="9" rx="1" />
-      <rect x="10" y="7" width="4" height="14" rx="1" />
-      <rect x="17" y="3" width="4" height="18" rx="1" />
-      <line x1="3" y1="21" x2="21" y2="21" />
-    </svg>
-  ),
-  // Code brackets — Data Engineering
-  dataEng: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  ),
-  // Cloud upload — Cloud & DevOps
-  cloud: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-      <polyline points="12 13 12 21" />
-      <polyline points="9 18 12 21 15 18" />
-    </svg>
-  ),
-  // Target — Management & Methods
-  management: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="6" />
-      <circle cx="12" cy="12" r="2" />
-    </svg>
-  ),
-  // Magnifying glass with + — Business Analysis
-  businessAnalysis: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-      <line x1="8" y1="11" x2="14" y2="11" />
-      <line x1="11" y1="8" x2="11" y2="14" />
-    </svg>
-  ),
-  // Lightning bolt — Methodologies & Project
-  methodology: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  ),
-  // Settings cog — IS & Data & Tools
-  tools: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="3" />
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
-    </svg>
-  ),
+/* ─── Custom SVG icons for brands not in Simple Icons (Microsoft, Tableau) ─── */
+
+const PowerBIIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <path d="M11.5 3.25a.75.75 0 0 0-.75.75v16a.75.75 0 0 0 1.5 0V4a.75.75 0 0 0-.75-.75zM7.5 7.25a.75.75 0 0 0-.75.75v12a.75.75 0 0 0 1.5 0V8a.75.75 0 0 0-.75-.75zm8-2a.75.75 0 0 0-.75.75v14a.75.75 0 0 0 1.5 0V6a.75.75 0 0 0-.75-.75zm-12 4a.75.75 0 0 0-.75.75v10a.75.75 0 0 0 1.5 0V10a.75.75 0 0 0-.75-.75zm16 2a.75.75 0 0 0-.75.75v8a.75.75 0 0 0 1.5 0V12a.75.75 0 0 0-.75-.75z" />
+  </svg>
+);
+
+const AzureIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <path d="M13.05 4.24 6.56 18.05l-4.49-.01 2.94-6.28a.5.5 0 0 0-.04-.52L.21 4.47a.5.5 0 0 1 .44-.77h5.75l6.65 13.07V4.24zm1.31 0h5.53L14.5 20.33a.5.5 0 0 1-.48.36H9.77z" />
+  </svg>
+);
+
+const SQLServerIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <ellipse cx="12" cy="5.5" rx="8" ry="2.5" />
+    <path d="M4 5.5v4C4 11.43 7.58 13 12 13s8-1.57 8-3.5v-4C20 7.43 16.42 9 12 9S4 7.43 4 5.5z" />
+    <path d="M4 9.5v4C4 15.43 7.58 17 12 17s8-1.57 8-3.5v-4C20 11.43 16.42 13 12 13S4 11.43 4 9.5z" />
+    <path d="M4 13.5v4C4 19.43 7.58 21 12 21s8-1.57 8-3.5v-4C20 15.43 16.42 17 12 17S4 15.43 4 13.5z" />
+  </svg>
+);
+
+const TableauIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <rect x="11.25" y="2" width="1.5" height="5" rx="0.75" />
+    <rect x="11.25" y="17" width="1.5" height="5" rx="0.75" />
+    <rect x="2" y="11.25" width="5" height="1.5" rx="0.75" />
+    <rect x="17" y="11.25" width="5" height="1.5" rx="0.75" />
+    <rect x="11.25" y="7.5" width="1.5" height="3.5" rx="0.75" />
+    <rect x="11.25" y="13" width="1.5" height="3.5" rx="0.75" />
+    <rect x="7.5" y="11.25" width="3.5" height="1.5" rx="0.75" />
+    <rect x="13" y="11.25" width="3.5" height="1.5" rx="0.75" />
+    <circle cx="12" cy="12" r="1.25" />
+  </svg>
+);
+
+const DAXIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <path d="M3 17l6-8 4 5 3-4 5 7H3z" opacity="0.9" />
+    <path d="M3 20h18v1.5H3z" />
+  </svg>
+);
+
+/* ─── Icon map: item name → react-icon or custom SVG ─── */
+const ITEM_ICONS: Record<string, IconType | React.ComponentType> = {
+  "dbt (Data Build Tool)": SiDbt,
+  "dbt":                   SiDbt,
+  "Apache Airflow":        SiApacheairflow,
+  "Python":                SiPython,
+  "Pandas":                SiPandas,
+  "NumPy":                 SiNumpy,
+  "Google BigQuery":       SiGooglebigquery,
+  "Snowflake":             SiSnowflake,
+  "Azure Synapse":         AzureIcon,
+  "SQL Server":            SQLServerIcon,
+  "PostgreSQL":            SiPostgresql,
+  "SQL Avancé":            SiPostgresql,
+  "Advanced SQL":          SiPostgresql,
+  "Power BI":              PowerBIIcon,
+  "DAX":                   DAXIcon,
+  "Tableau":               TableauIcon,
+  "Looker":                SiLooker,
+  "Metabase":              SiMetabase,
+  "Git / GitHub CI/CD":    SiGit,
+  "Git":                   SiGit,
+  "Docker":                SiDocker,
+  "JIRA":                  SiJira,
+  "Dataiku ML Practitioner": SiDataiku,
+  "Dataiku ML":            SiDataiku,
 };
 
-const TECH_KEYS = ["dataViz", "dataEng", "cloud", "management"];
-const FUNC_KEYS = ["businessAnalysis", "methodology", "tools"];
+/* ─── Category header icons (react-icons for real brand logos) ─── */
+const CATEGORY_ICONS: Record<string, ReactNode> = {
+  analytics: <SiDbt size={22} aria-hidden="true" />,
+  databases: <SiGooglebigquery size={22} aria-hidden="true" />,
+  dataviz:   <SiMetabase size={22} aria-hidden="true" />,
+  devops:    <SiDocker size={22} aria-hidden="true" />,
+};
+
+const TECH_KEYS = ["analytics", "databases", "dataviz", "devops"];
 
 const GREEN = "#22c55e";
 const CYAN = "#00f0ff";
@@ -76,12 +114,27 @@ type Category = {
   items: readonly string[];
 };
 
+type Certification = {
+  name: string;
+  org: string;
+  detail: string;
+  status: string;
+  color: string;
+};
+
+type Language = {
+  lang: string;
+  level: string;
+  native: boolean;
+};
+
 export default function Skills() {
   const { t } = useLanguage();
 
   const all = Object.entries(t.skills.categories) as [string, Category][];
   const techCats = all.filter(([k]) => TECH_KEYS.includes(k));
-  const funcCats = all.filter(([k]) => FUNC_KEYS.includes(k));
+  const certs = t.skills.certifications as readonly Certification[];
+  const langs = t.skills.languages as readonly Language[];
 
   return (
     <section id="skills" className="section-padding bg-bg-secondary">
@@ -89,22 +142,23 @@ export default function Skills() {
 
         <ScrollReveal>
           <SectionLabel text={t.skills.label} />
-          <h2 className="section-title font-display mt-4 mb-12 md:mb-20">
+          <h2 className="section-title font-display mt-4 mb-12 md:mb-16">
             {t.skills.title}
           </h2>
         </ScrollReveal>
 
-        {/* ── Technical group ── */}
+        {/* ── Technical group label ── */}
         <ScrollReveal>
           <GroupLabel label={t.skills.groupTech} color={GREEN} />
         </ScrollReveal>
 
+        {/* ── 4 skill cards ── */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: "20px",
-            marginBottom: "48px",
+            marginBottom: "56px",
           }}
         >
           {techCats.map(([key, cat], i) => (
@@ -119,29 +173,73 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* ── Functional group ── */}
+        {/* ── Certifications & Languages ── */}
         <ScrollReveal>
           <GroupLabel label={t.skills.groupFunc} color={CYAN} />
         </ScrollReveal>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
-            gap: "20px",
-          }}
-        >
-          {funcCats.map(([key, cat], i) => (
-            <ScrollReveal key={key} delay={Math.min(i * 0.08, 0.24)}>
-              <SkillCard
-                category={cat}
-                accent={CYAN}
-                index={techCats.length + i + 1}
-                icon={CATEGORY_ICONS[key]}
-              />
-            </ScrollReveal>
-          ))}
-        </div>
+        <ScrollReveal delay={0.1}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "16px",
+              alignItems: "flex-start",
+            }}
+          >
+            {/* Certification cards */}
+            {certs.map((cert) => (
+              <CertCard key={cert.name} cert={cert} />
+            ))}
+
+            {/* Language badges */}
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+                alignItems: "center",
+                padding: "16px 20px",
+                background: "var(--color-bg-card)",
+                border: `1px solid ${CYAN}28`,
+                borderTop: `3px solid ${CYAN}`,
+                borderRadius: "12px",
+              }}
+            >
+              {langs.map((l) => (
+                <div key={l.lang} style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: "var(--color-text)",
+                      fontFamily: "var(--font-display)",
+                    }}
+                  >
+                    {l.lang}
+                  </div>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      padding: "2px 8px",
+                      background: `${CYAN}12`,
+                      border: `1px solid ${CYAN}30`,
+                      borderRadius: "100px",
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      color: CYAN,
+                      fontFamily: "var(--font-mono)",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {l.level}
+                    {l.native && " ★"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>
@@ -149,17 +247,9 @@ export default function Skills() {
 }
 
 /* ─── Group label ─── */
-
 function GroupLabel({ label, color }: { label: string; color: string }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "20px",
-      }}
-    >
+    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
       <span
         style={{
           fontSize: "11px",
@@ -184,8 +274,73 @@ function GroupLabel({ label, color }: { label: string; color: string }) {
   );
 }
 
-/* ─── Card ─── */
+/* ─── Certification card ─── */
+function CertCard({ cert }: { cert: Certification }) {
+  const isObtained = cert.status === "Obtenu" || cert.status === "Obtained";
+  const Icon = ITEM_ICONS[cert.name] ?? ITEM_ICONS[cert.org + " ML"];
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "14px",
+        padding: "16px 20px",
+        background: "var(--color-bg-card)",
+        border: `1px solid var(--color-border)`,
+        borderLeft: `3px solid ${cert.color}`,
+        borderRadius: "12px",
+        minWidth: "220px",
+      }}
+    >
+      {/* Icon circle */}
+      <div
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: "10px",
+          background: `${cert.color}18`,
+          border: `1px solid ${cert.color}35`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: cert.color,
+          fontSize: "18px",
+          flexShrink: 0,
+        }}
+      >
+        {Icon ? <Icon /> : <span style={{ fontWeight: 700, fontSize: "13px", fontFamily: "var(--font-mono)" }}>{cert.org[0]}</span>}
+      </div>
+      <div>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-text)", fontFamily: "var(--font-display)", lineHeight: 1.2 }}>
+          {cert.name}
+        </div>
+        <div style={{ fontSize: "11px", color: "var(--color-text-muted)", marginTop: "2px" }}>
+          {cert.detail}
+        </div>
+        <span
+          style={{
+            display: "inline-block",
+            marginTop: "5px",
+            padding: "2px 8px",
+            borderRadius: "100px",
+            fontSize: "9px",
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            background: isObtained ? "rgba(34,197,94,0.1)" : `${cert.color}12`,
+            border: `1px solid ${isObtained ? "rgba(34,197,94,0.3)" : cert.color + "35"}`,
+            color: isObtained ? "#22c55e" : cert.color,
+            fontFamily: "var(--font-mono)",
+          }}
+        >
+          {isObtained ? "✓ " : "◎ "}{cert.status}
+        </span>
+      </div>
+    </div>
+  );
+}
 
+/* ─── Skill card ─── */
 function SkillCard({
   category,
   accent,
@@ -209,13 +364,12 @@ function SkillCard({
         borderTop: `3px solid ${accent}`,
         borderRadius: "12px",
         padding: "28px 28px 24px",
-        transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, background 0.3s ease",
+        transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s, border-color 0.3s, background 0.3s",
         cursor: "default",
         position: "relative",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        gap: "0",
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLDivElement;
@@ -234,15 +388,11 @@ function SkillCard({
         el.style.borderTopColor = accent;
       }}
     >
-      {/* Subtle top glow strip */}
+      {/* Glow strip */}
       <div
         aria-hidden="true"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "80px",
+          position: "absolute", top: 0, left: 0, right: 0, height: "80px",
           background: `radial-gradient(ellipse at 50% 0%, ${accent}0f 0%, transparent 70%)`,
           pointerEvents: "none",
         }}
@@ -251,32 +401,22 @@ function SkillCard({
       {/* Card number */}
       <span
         style={{
-          position: "absolute",
-          top: "20px",
-          right: "24px",
-          fontSize: "12px",
-          fontFamily: "var(--font-mono)",
-          fontWeight: 700,
-          color: `${accent}50`,
-          letterSpacing: "0.08em",
+          position: "absolute", top: "20px", right: "24px",
+          fontSize: "12px", fontFamily: "var(--font-mono)", fontWeight: 700,
+          color: `${accent}50`, letterSpacing: "0.08em",
         }}
         aria-hidden="true"
       >
         {num}
       </span>
 
-      {/* Icon */}
+      {/* Category icon */}
       <div
         style={{
           marginBottom: "16px",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "44px",
-          height: "44px",
-          borderRadius: "10px",
-          background: `${accent}12`,
-          border: `1px solid ${accent}28`,
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          width: "44px", height: "44px", borderRadius: "10px",
+          background: `${accent}12`, border: `1px solid ${accent}28`,
           color: accent,
         }}
         aria-hidden="true"
@@ -287,13 +427,9 @@ function SkillCard({
       {/* Title */}
       <h3
         style={{
-          fontSize: "18px",
-          fontWeight: 700,
-          fontFamily: "var(--font-display)",
-          color: "var(--color-text)",
-          letterSpacing: "-0.02em",
-          lineHeight: 1.2,
-          marginBottom: "12px",
+          fontSize: "18px", fontWeight: 700, fontFamily: "var(--font-display)",
+          color: "var(--color-text)", letterSpacing: "-0.02em",
+          lineHeight: 1.2, marginBottom: "12px",
         }}
       >
         {category.name}
@@ -302,37 +438,38 @@ function SkillCard({
       {/* Description */}
       <p
         style={{
-          fontSize: "13px",
-          lineHeight: 1.75,
-          color: "var(--color-text-secondary)",
-          marginBottom: "20px",
-          flex: 1,
+          fontSize: "13px", lineHeight: 1.75,
+          color: "var(--color-text-secondary)", marginBottom: "20px", flex: 1,
         }}
       >
         {category.description}
       </p>
 
-      {/* Skill pills */}
+      {/* Skill pills with brand icons */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-        {category.items.map((item) => (
-          <span
-            key={item}
-            style={{
-              padding: "3px 10px",
-              fontSize: "11px",
-              fontWeight: 500,
-              borderRadius: "100px",
-              background: `${accent}10`,
-              border: `1px solid ${accent}28`,
-              color: accent,
-              fontFamily: "var(--font-mono)",
-              letterSpacing: "0.02em",
-              transition: "background 0.2s, border-color 0.2s",
-            }}
-          >
-            {item}
-          </span>
-        ))}
+        {category.items.map((item) => {
+          const IconComp = ITEM_ICONS[item];
+          return (
+            <span
+              key={item}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "5px",
+                padding: "4px 10px",
+                fontSize: "11px", fontWeight: 500, borderRadius: "100px",
+                background: `${accent}10`, border: `1px solid ${accent}28`,
+                color: accent, fontFamily: "var(--font-mono)", letterSpacing: "0.02em",
+                transition: "background 0.2s, border-color 0.2s",
+              }}
+            >
+              {IconComp && (
+                <span style={{ fontSize: "12px", lineHeight: 1, display: "flex", alignItems: "center" }}>
+                  <IconComp />
+                </span>
+              )}
+              {item}
+            </span>
+          );
+        })}
       </div>
     </div>
   );

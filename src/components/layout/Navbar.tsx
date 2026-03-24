@@ -71,6 +71,7 @@ export default function Navbar() {
     { href: "#about", label: t.nav.about, id: "about" },
     { href: "#experience", label: t.nav.experience, id: "experience" },
     { href: "#skills", label: t.nav.skills, id: "skills" },
+    { href: "#projects", label: t.nav.projects, id: "projects" },
     { href: "#terminal", label: t.nav.terminal, id: "terminal" },
     { href: "#contact", label: t.nav.contact, id: "contact" },
   ];
