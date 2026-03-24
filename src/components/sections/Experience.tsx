@@ -226,6 +226,7 @@ function JobCard({
     period: string;
     description?: string;
     highlights: readonly string[];
+    competences?: readonly string[];
   };
   isFirst: boolean;
   lang: string;
@@ -388,8 +389,20 @@ function JobCard({
         </p>
       )}
 
-      {/* Highlights */}
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+      {/* Key impact highlights */}
+      <p
+        style={{
+          fontSize: "10px",
+          fontWeight: 600,
+          letterSpacing: "1.5px",
+          textTransform: "uppercase",
+          color: "var(--color-text-muted)",
+          marginBottom: "12px",
+        }}
+      >
+        {lang === "fr" ? "Réalisations clés" : "Key achievements"}
+      </p>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "20px" }}>
         {job.highlights.map((h, j) => (
           <li
             key={h}
@@ -409,6 +422,51 @@ function JobCard({
           </li>
         ))}
       </ul>
+
+      {/* Competences pills */}
+      {job.competences && job.competences.length > 0 && (
+        <div
+          style={{
+            paddingTop: "16px",
+            borderTop: "1px solid var(--color-border)",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "10px",
+              fontWeight: 600,
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              color: "var(--color-text-muted)",
+              marginBottom: "10px",
+            }}
+          >
+            {lang === "fr" ? "Compétences mobilisées" : "Key competences"}
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {job.competences.map((c) => (
+              <span
+                key={c}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  padding: "3px 10px",
+                  background: "rgba(34,197,94,0.06)",
+                  border: "1px solid rgba(34,197,94,0.2)",
+                  borderRadius: "100px",
+                  fontSize: "11px",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  whiteSpace: "nowrap",
+                  lineHeight: 1.5,
+                }}
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
