@@ -65,71 +65,32 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ─── Light theme ────────────────────────────────────────────────────── */
-/* Tailwind v4 injects @theme vars via `*, :root` — so [data-theme="light"] alone
-   only overrides <html>; child elements keep the dark values from `*`.
-   We must also target `[data-theme="light"] *` to beat the `*` selector. */
+/* ─── Zinc (dim) theme — premium dark grey alternative ────────────────── */
+/* Replaces the previous light/grey theme. A sophisticated zinc-dark palette
+   that differs clearly from the near-black default while keeping full
+   legibility and the same vivid accent palette (cyan, purple, pink, green).
+   Same Tailwind v4 selector trick: must target `[data-theme="light"] *`
+   to beat the `*` specificity injected by @theme. */
 [data-theme="light"],
 [data-theme="light"] * {
-  --color-bg: #dde1e8;
-  --color-bg-secondary: #d2d6de;
-  --color-bg-card: #e6eaf0;
-  --color-bg-card-hover: #dde1e8;
-  --color-border: #bcc2cc;
-  --color-border-light: #adb4bf;
-  --color-accent: #0077a0;
-  --color-accent-secondary: #6d28d9;
-  --color-accent-glow: rgba(0, 119, 160, 0.1);
-  --color-accent-secondary-glow: rgba(109, 40, 217, 0.1);
-  --color-accent-pink: #be185d;
-  --color-accent-green: #15803d;
-  --color-accent-green-glow: rgba(21, 128, 61, 0.1);
-  --color-text: #0d1117;
-  --color-text-secondary: #2d3748;
-  --color-text-muted: #4a5568;
-  --color-bg-overlay: rgba(221, 225, 232, 0.97);
-  --color-bg-card-inner: rgba(230, 234, 240, 0.85);
-}
-
-/* Light theme — override hardcoded rgba(0,240,255) decorative tints */
-
-/* Gradient text: replace #7dd3fc (invisible on white) with vivid blue */
-[data-theme="light"] .glow-text {
-  background: linear-gradient(135deg, #005f8a 0%, #2563eb 50%, #5b21b6 100%);
-}
-
-[data-theme="light"] .label-badge {
-  border-color: rgba(0, 119, 160, 0.25);
-  background: rgba(0, 119, 160, 0.06);
-}
-[data-theme="light"] .label-badge::before {
-  background: var(--color-accent);
-  box-shadow: 0 0 8px rgba(0, 119, 160, 0.5);
-}
-[data-theme="light"] .card:hover {
-  box-shadow: 0 20px 60px rgba(0, 119, 160, 0.1);
-}
-[data-theme="light"] .btn-primary:hover {
-  box-shadow: 0 12px 32px rgba(0, 119, 160, 0.28);
-}
-[data-theme="light"] .btn-secondary:hover {
-  box-shadow: 0 12px 32px rgba(0, 119, 160, 0.14);
-}
-[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: var(--color-border-light);
-}
-/* Hero decorative elements in light mode */
-[data-theme="light"] .hero-photo-frame {
-  border-color: rgba(0, 119, 160, 0.3) !important;
-  box-shadow: 0 0 30px rgba(0, 119, 160, 0.1), 0 0 60px rgba(0, 119, 160, 0.05) !important;
-}
-[data-theme="light"] .hero-title-badge {
-  box-shadow: 0 0 20px rgba(0, 119, 160, 0.2) !important;
-}
-/* Selection color adapted to light theme */
-[data-theme="light"] ::selection {
-  background-color: rgba(0, 119, 160, 0.15);
-  color: var(--color-text);
+  --color-bg: #18181b;
+  --color-bg-secondary: #141416;
+  --color-bg-card: #27272a;
+  --color-bg-card-hover: #3f3f46;
+  --color-border: #3f3f46;
+  --color-border-light: #52525b;
+  --color-accent: #00f0ff;
+  --color-accent-secondary: #a855f7;
+  --color-accent-glow: rgba(0, 240, 255, 0.12);
+  --color-accent-secondary-glow: rgba(168, 85, 247, 0.12);
+  --color-accent-pink: #ff6b9d;
+  --color-accent-green: #22c55e;
+  --color-accent-green-glow: rgba(34, 197, 94, 0.12);
+  --color-text: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-bg-overlay: rgba(24, 24, 27, 0.97);
+  --color-bg-card-inner: rgba(39, 39, 42, 0.85);
 }
 
 /* Focus-visible — keyboard navigation (WCAG AA) */

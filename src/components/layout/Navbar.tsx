@@ -327,7 +327,7 @@ function ThemeToggle({
       }}
       aria-label={
         isDark
-          ? lang === "fr" ? "Passer en mode clair" : "Switch to light mode"
+          ? lang === "fr" ? "Passer en mode gris" : "Switch to dim mode"
           : lang === "fr" ? "Passer en mode sombre" : "Switch to dark mode"
       }
       aria-pressed={!isDark}
@@ -375,10 +375,10 @@ function LangToggle({
   theme: Theme;
 }) {
   const isSmall = size === "sm";
-  // Hardcoded per-theme so the container is always visibly grey,
+  // Hardcoded per-theme so the container is always visibly distinct,
   // regardless of CSS variable resolution order (Tailwind v4 `*` scope issue).
-  const containerBg = theme === "light" ? "#b8bec9" : "#1e1e20";
-  const containerBorder = theme === "light" ? "1px solid #9aa2ae" : "1px solid #2e2e32";
+  const containerBg = theme === "light" ? "#3f3f46" : "#1e1e20";
+  const containerBorder = theme === "light" ? "1px solid #52525b" : "1px solid #2e2e32";
 
   return (
     <div
