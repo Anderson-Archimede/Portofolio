@@ -174,8 +174,9 @@ export default function ParticleCanvas() {
       if (!ctx || !running) return;
 
       // Soft trail — adapts to current theme
-      const isLight = document.documentElement.getAttribute("data-theme") === "light";
-      ctx.fillStyle = isLight ? "rgba(245, 247, 250, 0.28)" : "rgba(8, 8, 8, 0.22)";
+      // Default (no data-theme) = zinc #18181b; data-theme="light" = near-black #080808
+      const isAlt = document.documentElement.getAttribute("data-theme") === "light";
+      ctx.fillStyle = isAlt ? "rgba(8, 8, 8, 0.22)" : "rgba(24, 24, 27, 0.22)";
       ctx.fillRect(0, 0, width, height);
 
       const mx = mouseRef.current.x;
@@ -217,7 +218,7 @@ export default function ParticleCanvas() {
           ctx.beginPath();
           ctx.moveTo(n1.x, n1.y);
           ctx.quadraticCurveTo(cpx, cpy, n2.x, n2.y);
-          ctx.strokeStyle = isLight ? "rgba(0,0,0,0.07)" : "rgba(255,255,255,0.032)";
+          ctx.strokeStyle = "rgba(255,255,255,0.032)";
           ctx.lineWidth = 1;
           ctx.stroke();
           ctx.restore();

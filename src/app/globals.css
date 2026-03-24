@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Backgrounds */
-  --color-bg: #080808;
-  --color-bg-secondary: #0c0c0c;
-  --color-bg-card: #101010;
-  --color-bg-card-hover: #161616;
+  /* ── Zinc-dark (premium) — DEFAULT theme ─────────────────────────────── */
+  --color-bg: #18181b;
+  --color-bg-secondary: #141416;
+  --color-bg-card: #27272a;
+  --color-bg-card-hover: #3f3f46;
 
   /* Borders */
-  --color-border: #1c1c1c;
-  --color-border-light: #242424;
+  --color-border: #3f3f46;
+  --color-border-light: #52525b;
 
   /* Accent — electric cyan PRIMARY */
   --color-accent: #00f0ff;
@@ -20,19 +20,19 @@
   --color-accent-green: #22c55e;
   --color-accent-green-glow: rgba(34, 197, 94, 0.12);
 
-  /* Text — a0a0a0 instead of 808080 for WCAG AA compliance */
-  --color-text: #f0f0f0;
-  --color-text-secondary: #a0a0a0;
-  --color-text-muted: #5a5a5a;
+  /* Text */
+  --color-text: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
 
   /* Typography */
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Plus Jakarta Sans", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  /* Overlay helpers (theme-adaptive via [data-theme="light"] overrides below) */
-  --color-bg-overlay: rgba(8, 8, 8, 0.97);
-  --color-bg-card-inner: rgba(8, 8, 8, 0.7);
+  /* Overlay helpers */
+  --color-bg-overlay: rgba(24, 24, 27, 0.97);
+  --color-bg-card-inner: rgba(39, 39, 42, 0.85);
 }
 
 * {
@@ -65,32 +65,23 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ─── Zinc (dim) theme — premium dark grey alternative ────────────────── */
-/* Replaces the previous light/grey theme. A sophisticated zinc-dark palette
-   that differs clearly from the near-black default while keeping full
-   legibility and the same vivid accent palette (cyan, purple, pink, green).
-   Same Tailwind v4 selector trick: must target `[data-theme="light"] *`
-   to beat the `*` specificity injected by @theme. */
+/* ─── Near-black toggle theme ─────────────────────────────────────────── */
+/* Secondary theme activated by the toggle button. Near-black palette for
+   maximum contrast. Tailwind v4 injects @theme vars via `*, :root` at
+   specificity (0,0,0)/(0,1,0) — `[data-theme="light"] *` at (0,1,0) wins. */
 [data-theme="light"],
 [data-theme="light"] * {
-  --color-bg: #18181b;
-  --color-bg-secondary: #141416;
-  --color-bg-card: #27272a;
-  --color-bg-card-hover: #3f3f46;
-  --color-border: #3f3f46;
-  --color-border-light: #52525b;
-  --color-accent: #00f0ff;
-  --color-accent-secondary: #a855f7;
-  --color-accent-glow: rgba(0, 240, 255, 0.12);
-  --color-accent-secondary-glow: rgba(168, 85, 247, 0.12);
-  --color-accent-pink: #ff6b9d;
-  --color-accent-green: #22c55e;
-  --color-accent-green-glow: rgba(34, 197, 94, 0.12);
-  --color-text: #fafafa;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
-  --color-bg-overlay: rgba(24, 24, 27, 0.97);
-  --color-bg-card-inner: rgba(39, 39, 42, 0.85);
+  --color-bg: #080808;
+  --color-bg-secondary: #0c0c0c;
+  --color-bg-card: #101010;
+  --color-bg-card-hover: #161616;
+  --color-border: #1c1c1c;
+  --color-border-light: #242424;
+  --color-text: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #5a5a5a;
+  --color-bg-overlay: rgba(8, 8, 8, 0.97);
+  --color-bg-card-inner: rgba(8, 8, 8, 0.7);
 }
 
 /* Focus-visible — keyboard navigation (WCAG AA) */
