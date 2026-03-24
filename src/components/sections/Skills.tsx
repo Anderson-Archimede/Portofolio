@@ -16,7 +16,6 @@ import {
   SiDocker,
   SiJira,
   SiDataiku,
-  SiIbm,
   SiCoursera,
   SiHubspot,
   SiGoogleanalytics,
@@ -103,10 +102,7 @@ const ITEM_ICONS: Record<string, IconType | React.ComponentType> = {
   "Google":                SiGoogleanalytics,
   "Certification Google Analytics": SiGoogleanalytics,
   "Google Analytics Certification": SiGoogleanalytics,
-  "IBM":                   SiIbm,
   "Python for Data Science": SiPython,
-  "Data Visualization with R": SiIbm,
-  "Hadoop Foundations - Level 1": SiIbm,
   "Coursera":              SiCoursera,
   "Introduction to CRM with HubSpot": SiHubspot,
 };
