@@ -211,6 +211,21 @@ export default function Terminal() {
                 >
                   Paris, France
                 </span>
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    padding: "5px 12px",
+                    background: "rgba(0,240,255,0.04)",
+                    border: "1px solid rgba(0,240,255,0.15)",
+                    borderRadius: "20px",
+                    fontSize: "11px",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  {t.terminal.relocatable}
+                </span>
               </div>
             </motion.div>
 

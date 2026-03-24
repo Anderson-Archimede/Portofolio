@@ -16,6 +16,10 @@ import {
   SiDocker,
   SiJira,
   SiDataiku,
+  SiIbm,
+  SiCoursera,
+  SiHubspot,
+  SiGoogleanalytics,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -92,6 +96,19 @@ const ITEM_ICONS: Record<string, IconType | React.ComponentType> = {
   "JIRA":                  SiJira,
   "Dataiku ML Practitioner": SiDataiku,
   "Dataiku ML":            SiDataiku,
+  // Cert org-level fallbacks
+  "Dataiku":               SiDataiku,
+  "Dataiku Advanced Designer": SiDataiku,
+  "Dataiku Core Designer": SiDataiku,
+  "Google":                SiGoogleanalytics,
+  "Certification Google Analytics": SiGoogleanalytics,
+  "Google Analytics Certification": SiGoogleanalytics,
+  "IBM":                   SiIbm,
+  "Python for Data Science": SiPython,
+  "Data Visualization with R": SiIbm,
+  "Hadoop Foundations - Level 1": SiIbm,
+  "Coursera":              SiCoursera,
+  "Introduction to CRM with HubSpot": SiHubspot,
 };
 
 /* ─── Category header icons (react-icons for real brand logos) ─── */
@@ -120,6 +137,7 @@ type Certification = {
   detail: string;
   status: string;
   color: string;
+  date?: string;
 };
 
 type Language = {
@@ -277,7 +295,7 @@ function GroupLabel({ label, color }: { label: string; color: string }) {
 /* ─── Certification card ─── */
 function CertCard({ cert }: { cert: Certification }) {
   const isObtained = cert.status === "Obtenu" || cert.status === "Obtained";
-  const Icon = ITEM_ICONS[cert.name] ?? ITEM_ICONS[cert.org + " ML"];
+  const Icon = ITEM_ICONS[cert.name] ?? ITEM_ICONS[cert.org];
   return (
     <div
       style={{
@@ -317,6 +335,11 @@ function CertCard({ cert }: { cert: Certification }) {
         <div style={{ fontSize: "11px", color: "var(--color-text-muted)", marginTop: "2px" }}>
           {cert.detail}
         </div>
+        {cert.date && (
+          <div style={{ fontSize: "10px", color: "var(--color-text-muted)", marginTop: "2px", fontFamily: "var(--font-mono)", opacity: 0.6 }}>
+            {cert.date}
+          </div>
+        )}
         <span
           style={{
             display: "inline-block",
