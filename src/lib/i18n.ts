@@ -16,7 +16,7 @@ export const translations = {
       fullName: "Kouassi Anderson Ehoussou",
       title: "Analytics Engineer & Data Analyst",
       subtitle:
-        "Expert de la Modern Data Stack (dbt, BigQuery/Snowflake). Je transforme des données brutes en modèles analytiques robustes et orientés ROI.",
+        "Expert de la Modern Data Stack (PowerBI, dbt, BigQuery/Snowflake). Je transforme des données brutes en modèles analytiques robustes et orientés ROI.",
       since: "Data analyst depuis 2023",
       currently: "En recherche active · Disponible immédiatement",
       cta: "En savoir plus",
@@ -334,8 +334,8 @@ export const translations = {
       fullName: "Kouassi Anderson Ehoussou",
       title: "Analytics Engineer & Data Analyst",
       subtitle:
-        "Modern Data Stack expert (dbt, BigQuery/Snowflake). I turn raw data into robust, ROI-driven analytical models.",
-      since: "Data analyst since 2021",
+        "Modern Data Stack expert (PowerI, dbt, BigQuery/Snowflake). I turn raw data into robust, ROI-driven analytical models.",
+      since: "Data analyst since 2023",
       currently: "Actively seeking new opportunities · Available immediately",
       cta: "Learn more",
       contact: "Get in touch",
