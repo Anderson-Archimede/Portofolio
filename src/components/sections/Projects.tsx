@@ -82,13 +82,10 @@ export default function Projects() {
           </p>
         </ScrollReveal>
 
-        {/* Project cards */}
+        {/* Project cards — 1-col mobile, 2-col md, 3-col lg */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
-            gap: "20px",
-          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          style={{ gap: "20px" }}
         >
           {projects.map((project, i) => {
             const accent = ACCENTS[i % ACCENTS.length];
@@ -125,7 +122,7 @@ function ProjectCard({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
       style={{
         background: "var(--color-bg-card)",
@@ -156,12 +153,14 @@ function ProjectCard({
         }}
       />
 
-      {/* Year badge */}
+      {/* Year badge + highlight metric */}
       <div
         style={{
           display: "flex",
+          flexWrap: "wrap",
           justifyContent: "space-between",
           alignItems: "center",
+          gap: "8px",
           marginBottom: "16px",
         }}
       >
@@ -176,11 +175,12 @@ function ProjectCard({
             fontWeight: 700,
             color: accent,
             letterSpacing: "0.06em",
+            flexShrink: 0,
           }}
         >
           {project.year}
         </span>
-        {/* Highlight metric */}
+        {/* Highlight metric — shrinks then wraps on very narrow screens */}
         <span
           style={{
             fontSize: "11px",
@@ -191,6 +191,8 @@ function ProjectCard({
             border: "1px solid rgba(34,197,94,0.2)",
             padding: "3px 10px",
             borderRadius: "100px",
+            maxWidth: "100%",
+            overflowWrap: "break-word",
           }}
         >
           {project.highlight}

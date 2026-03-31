@@ -33,6 +33,9 @@
   /* Overlay helpers */
   --color-bg-overlay: rgba(24, 24, 27, 0.97);
   --color-bg-card-inner: rgba(39, 39, 42, 0.85);
+
+  /* Layout — mobile container */
+  --container-mobile: 100%;
 }
 
 * {
@@ -342,6 +345,14 @@ body {
 
 /* ─── Mobile responsive overrides ──────────────────────────────── */
 @media (max-width: 767px) {
+  /* Section padding: reduce minimum from 80px to 52px on mobile */
+  .section-padding {
+    padding-top: clamp(52px, 10vw, 80px);
+    padding-bottom: clamp(52px, 10vw, 80px);
+    padding-left: clamp(20px, 5vw, 32px);
+    padding-right: clamp(20px, 5vw, 32px);
+  }
+
   /* Card base: smaller padding on mobile */
   .card {
     padding: 20px;
@@ -405,11 +416,6 @@ body {
   /* Terminal input: prevent iOS Safari auto-zoom on focus (requires ≥16px) */
   [data-terminal="body"] input {
     font-size: 16px !important;
-  }
-
-  /* About metrics: 2 columns on mobile (more compact than 1-col) */
-  [data-metrics-grid] {
-    grid-template-columns: repeat(2, 1fr) !important;
   }
 
   /* Skills cards: reduce inline padding on mobile */

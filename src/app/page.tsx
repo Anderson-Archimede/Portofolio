@@ -1,3 +1,10 @@
+/* RESPONSIVE BREAKPOINTS:
+ * sm (640px)  — Mobile landscape
+ * md (768px)  — Tablet / hamburger → full nav transition
+ * lg (1024px) — Laptop
+ * xl (1280px) — Desktop (original layout preserved)
+ */
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -20,7 +27,7 @@ export default function Home() {
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" style={{ overflowX: "hidden" }}>
         <Hero />
         <About />
         <Experience />

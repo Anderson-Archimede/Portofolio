@@ -37,6 +37,7 @@ export default function Footer() {
         <button
           onClick={scrollToTop}
           className="flex items-center gap-1.5 font-mono text-text-muted hover:text-accent transition-colors duration-200 group"
+          style={{ minHeight: "44px", padding: "0 12px" }}
           aria-label={t.footer.scrollTop}
         >
           <svg

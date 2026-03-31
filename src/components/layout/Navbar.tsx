@@ -77,8 +77,25 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+    <>
+      {/* Backdrop — full-screen overlay; click anywhere outside the drawer to close */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-40 md:hidden"
+            style={{ background: "rgba(0, 0, 0, 0.55)", backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
         background: scrolled ? "var(--color-bg-overlay)" : "transparent",
         backdropFilter: scrolled ? "blur(28px)" : "blur(12px)",
@@ -216,6 +233,8 @@ export default function Navbar() {
               background: "var(--color-bg-overlay)",
               backdropFilter: "blur(32px)",
               WebkitBackdropFilter: "blur(32px)",
+              maxHeight: "calc(100vh - 64px)",
+              overflowY: "auto",
             }}
           >
             <nav aria-label={lang === "fr" ? "Menu principal" : "Main menu"}>
@@ -254,13 +273,42 @@ export default function Navbar() {
                   </a>
                 ))}
               </div>
-              {/* Footer zone: cta */}
+              {/* Footer zone: controls + cta */}
               <div
                 style={{
-                  padding: "12px 21px 20px",
+                  padding: "16px 21px 24px",
                   borderTop: "1px solid var(--color-border)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
                 }}
               >
+                {/* Theme & language controls row */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 600,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "var(--color-text-muted)",
+                    }}
+                  >
+                    {lang === "fr" ? "Thème & Langue" : "Theme & Language"}
+                  </span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <ThemeToggle theme={theme} toggleTheme={toggleTheme} lang={lang} size="sm" />
+                    <LangToggle lang={lang} setLang={setLang} size="sm" theme={theme} />
+                  </div>
+                </div>
+                {/* Contact CTA */}
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
@@ -274,7 +322,8 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+      </nav>
+    </>
   );
 }
 

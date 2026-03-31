@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -63,7 +64,7 @@ function fadeUp(delay = 0) {
   return {
     initial: { opacity: 0, y: 18 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
+    viewport: { once: true, amount: 0 },
     transition: { duration: 0.45, delay },
   };
 }
@@ -100,18 +101,15 @@ export default function Terminal() {
 
         {/* ── Bento layout ── */}
         <div
+          className="grid grid-cols-1 md:grid-cols-[340px_1fr]"
           style={{
-            display: "flex",
             gap: "16px",
             alignItems: "flex-start",
-            flexWrap: "wrap",
           }}
         >
           {/* ════════ LEFT COLUMN ════════ */}
           <div
             style={{
-              flex: "0 0 340px",
-              minWidth: "280px",
               display: "flex",
               flexDirection: "column",
               gap: "14px",
@@ -130,6 +128,7 @@ export default function Terminal() {
               {/* Avatar */}
               <div
                 style={{
+                  position: "relative",
                   width: 56,
                   height: 56,
                   borderRadius: "50%",
@@ -140,10 +139,12 @@ export default function Terminal() {
                   boxShadow: "0 0 0 3px rgba(124,58,237,0.1)",
                 }}
               >
-                <img
+                <Image
                   src="/images/profile.jpg"
                   alt="Anderson Kouassi"
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  fill
+                  className="object-cover"
+                  sizes="56px"
                 />
               </div>
 
@@ -230,13 +231,7 @@ export default function Terminal() {
             </motion.div>
 
             {/* ── Stats row (3 mini cards) ── */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px",
-              }}
-            >
+            <div className="grid grid-cols-3" style={{ gap: "10px" }}>
               {t.about.metrics.map((m, i) => (
                 <motion.div
                   key={i}
@@ -249,7 +244,7 @@ export default function Terminal() {
                 >
                   <div
                     style={{
-                      fontSize: "20px",
+                      fontSize: "clamp(14px, 3.5vw, 20px)",
                       fontWeight: 700,
                       fontFamily: "var(--font-display)",
                       background: "linear-gradient(135deg, #7c3aed, #06b6d4)",
@@ -329,8 +324,6 @@ export default function Terminal() {
           {/* ════════ RIGHT COLUMN ════════ */}
           <div
             style={{
-              flex: 1,
-              minWidth: "300px",
               display: "flex",
               flexDirection: "column",
               gap: "14px",

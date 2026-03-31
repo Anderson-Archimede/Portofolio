@@ -99,6 +99,38 @@ export default function Experience() {
             }}
           />
 
+          {/* MOBILE BASE LINE — static, full height, left-aligned under the dots */}
+          <div
+            className="md:hidden"
+            style={{
+              position: "absolute",
+              left: "4.25px",
+              top: 0,
+              bottom: 0,
+              width: "1.5px",
+              background:
+                "linear-gradient(to bottom, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0.07) 100%)",
+            }}
+          />
+
+          {/* MOBILE ANIMATED FILL LINE — spring-driven, mirrors desktop but left-aligned */}
+          <motion.div
+            className="md:hidden"
+            style={{
+              position: "absolute",
+              left: "3.5px",
+              top: 0,
+              width: "3px",
+              height: lineHeight,
+              background:
+                "linear-gradient(to bottom, #22c55e 0%, #16a34a 80%, rgba(34,197,94,0.3) 100%)",
+              boxShadow:
+                "0 0 6px rgba(34,197,94,0.5), 0 0 16px rgba(34,197,94,0.2)",
+              borderRadius: "2px",
+              zIndex: 2,
+            }}
+          />
+
           {/* Timeline items */}
           <div className="flex flex-col gap-10 md:gap-16">
             {t.experience.jobs.map((job, i) => (
@@ -131,7 +163,7 @@ export default function Experience() {
                     <motion.div
                       initial={{ scale: 0, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: true, amount: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.12 + 0.2 }}
                       style={{
                         width: "14px",
@@ -164,14 +196,13 @@ export default function Experience() {
                       alignItems: "flex-start",
                     }}
                   >
-                    {/* Mobile dot + connector line */}
+                    {/* Mobile dot — continuous base+animated lines handle the connector */}
                     <div
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
                         flexShrink: 0,
                         marginTop: "24px",
+                        position: "relative",
+                        zIndex: 10,
                       }}
                     >
                       <div
@@ -181,22 +212,12 @@ export default function Experience() {
                           borderRadius: "50%",
                           transition: "background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
                           background: isLit(i) ? "#22c55e" : "var(--color-bg)",
-                          border: `2px solid ${isLit(i) ? "#22c55e" : "rgba(34,197,94,0.4)"}`,
+                          border: `2px solid ${isLit(i) ? "#22c55e" : "rgba(34,197,94,0.35)"}`,
                           boxShadow: isLit(i)
                             ? "0 0 10px rgba(34,197,94,0.9), 0 0 20px rgba(34,197,94,0.4)"
                             : "none",
                         }}
                       />
-                      {i < t.experience.jobs.length - 1 && (
-                        <div
-                          style={{
-                            width: "1px",
-                            flexGrow: 1,
-                            background: "linear-gradient(to bottom, rgba(34,197,94,0.4), rgba(34,197,94,0.1))",
-                            marginTop: "8px",
-                          }}
-                        />
-                      )}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <JobCard job={job} isFirst={i === 0} lang={lang} mobile />

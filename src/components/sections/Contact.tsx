@@ -301,7 +301,8 @@ export default function Contact() {
                 <button
                   onClick={copyEmail}
                   style={{
-                    padding: "8px 14px",
+                    padding: "10px 14px",
+                    minHeight: "44px",
                     borderRadius: "6px",
                     border: "1px solid var(--color-border-light)",
                     background: "var(--color-bg-card)",
@@ -343,7 +344,7 @@ export default function Contact() {
         {/* Social links card grid */}
         <ScrollReveal delay={0.25}>
           <div
-            className="grid grid-cols-1 sm:grid-cols-3"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             style={{
               gap: "12px",
               marginBottom: "16px",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import Image from "next/image";
@@ -9,6 +9,14 @@ import ParticleCanvas from "@/components/ui/ParticleCanvas";
 export default function Hero() {
   const { t } = useLanguage();
   const [imgError, setImgError] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg">
@@ -24,10 +32,10 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-4 sm:mb-5"
+          className="mb-4 md:mb-5"
         >
-          {/* Responsive photo size: 160px mobile, 200px sm+ */}
-          <div className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px]" style={{ position: "relative" }}>
+          {/* Responsive photo size: 140px mobile, 200px md+ */}
+          <div className="w-[140px] h-[140px] md:w-[200px] md:h-[200px]" style={{ position: "relative" }}>
             {/* Background glow orb — clipped to section overflow-hidden */}
             <div
               aria-hidden="true"
@@ -87,7 +95,7 @@ export default function Hero() {
                   onError={() => setImgError(true)}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-bg-card text-[48px] sm:text-[56px] font-display font-bold text-accent">
+                <div className="w-full h-full flex items-center justify-center bg-bg-card text-[40px] md:text-[56px] font-display font-bold text-accent">
                   AK
                 </div>
               )}
@@ -100,7 +108,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6 }}
-          className="mb-8 sm:mb-10 flex flex-col items-center gap-2"
+          className="mb-8 md:mb-10 flex flex-col items-center gap-2"
         >
           <span
             className="hero-title-badge"
@@ -140,11 +148,20 @@ export default function Hero() {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12 sm:mb-16 w-full"
+          className="mb-12 md:mb-16 w-full"
         >
-          <h1 className="crshdn-title font-display">
+          <h1
+            className="crshdn-title font-display"
+            style={{ fontSize: isMobile ? "1.875rem" : "clamp(34px, 10vw, 170px)" }}
+          >
             <span className="block text-text">{t.hero.greeting}</span>
-            <span className="crshdn-name block text-text">
+            <span
+              className="crshdn-name block text-text"
+              style={{
+                fontSize: isMobile ? "1.875rem" : "clamp(72px, 10vw, 124px)",
+                whiteSpace: isMobile ? "normal" : "nowrap",
+              }}
+            >
               {t.hero.name}
               <span style={{ color: "var(--color-accent)" }}>.</span>
             </span>
@@ -172,7 +189,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.6 }}
-          className="mb-8 sm:mb-10"
+          className="mb-8 md:mb-10"
         >
           <a
             href="#experience"
@@ -226,11 +243,11 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         >
-          <div className="flex flex-col sm:flex-row gap-3 sm:justify-center items-stretch sm:items-center">
-            <a href="#about" className="btn btn-primary w-full sm:w-auto" style={{ justifyContent: "center" }}>
+          <div className="flex flex-col md:flex-row gap-3 md:justify-center items-stretch md:items-center">
+            <a href="#about" className="btn btn-primary w-full md:w-auto" style={{ justifyContent: "center" }}>
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn btn-secondary w-full sm:w-auto" style={{ justifyContent: "center" }}>
+            <a href="#contact" className="btn btn-secondary w-full md:w-auto" style={{ justifyContent: "center" }}>
               {t.hero.contact}
             </a>
           </div>

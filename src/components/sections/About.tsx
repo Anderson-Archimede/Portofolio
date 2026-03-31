@@ -16,10 +16,13 @@ export default function About() {
           "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,240,255,0.03) 0%, transparent 70%)",
       }}
     >
-      <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      <div className="max-w-[800px] mx-auto">
         <ScrollReveal>
           <SectionLabel text={t.about.label} />
-          <h2 className="section-title font-display mt-4 mb-10 md:mb-16">
+          <h2
+            className="section-title font-display mt-4 mb-10 md:mb-16"
+            style={{ fontSize: "clamp(22px, 6vw, 60px)" }}
+          >
             {t.about.title}
           </h2>
         </ScrollReveal>
@@ -37,6 +40,7 @@ export default function About() {
                 fontStyle: "italic",
                 borderLeft: "3px solid var(--color-accent)",
                 paddingLeft: "16px",
+                overflowWrap: "break-word",
               }}
             >
               {t.about.p1}
@@ -50,6 +54,7 @@ export default function About() {
                 fontSize: "clamp(15px, 2vw, 18px)",
                 lineHeight: "1.85",
                 color: "var(--color-text-secondary)",
+                overflowWrap: "break-word",
               }}
             >
               {t.about.p2}
@@ -63,6 +68,7 @@ export default function About() {
                 fontSize: "clamp(15px, 2vw, 18px)",
                 lineHeight: "1.85",
                 color: "var(--color-text-secondary)",
+                overflowWrap: "break-word",
               }}
             >
               {t.about.p3}
@@ -72,10 +78,8 @@ export default function About() {
           {/* Key metrics strip */}
           <ScrollReveal delay={0.36}>
             <div
-              data-metrics-grid
+              className="grid grid-cols-1 md:grid-cols-3"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "1px",
                 marginTop: "16px",
                 background: "var(--color-border)",

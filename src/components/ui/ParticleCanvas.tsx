@@ -34,8 +34,10 @@ const PALETTE = [
 // ─── Builders ─────────────────────────────────────────────────────────────────
 
 function buildNodes(width: number, height: number, isMobile: boolean): RingNode[] {
-  const count = isMobile ? 10 : 20;
-  const cols = isMobile ? 3 : 5;
+  // Three-tier sizing: small phone (<480px), mobile (<768px), desktop
+  const isSmall = isMobile && width < 480;
+  const count = isSmall ? 7 : (isMobile ? 10 : 20);
+  const cols = isSmall ? 2 : (isMobile ? 3 : 5);
   const rows = Math.ceil(count / cols);
   const cellW = width / cols;
   const cellH = height / rows;
@@ -46,7 +48,7 @@ function buildNodes(width: number, height: number, isMobile: boolean): RingNode[
     const row = Math.floor(i / cols);
     const px = PALETTE[i % PALETTE.length];
 
-    const outerR = (isMobile ? 4 : 5) + Math.random() * (isMobile ? 16 : 20);
+    const outerR = (isSmall ? 3 : (isMobile ? 4 : 5)) + Math.random() * (isSmall ? 10 : (isMobile ? 16 : 20));
     const hasInner = Math.random() < 0.45;
     const innerR = hasInner ? outerR * (0.45 + Math.random() * 0.2) : 0;
 
@@ -74,8 +76,8 @@ function buildNodes(width: number, height: number, isMobile: boolean): RingNode[
     n.baseY = n.y;
   });
 
-  // Connect each node to its 2-3 nearest neighbours
-  const maxConn = isMobile ? 2 : 3;
+  // Connect each node to its nearest neighbours
+  const maxConn = isSmall ? 1 : (isMobile ? 2 : 3);
   for (let i = 0; i < nodes.length; i++) {
     const dists = nodes
       .map((n, j) => {
@@ -199,7 +201,7 @@ export default function ParticleCanvas() {
 
         // Subtle glow behind ring
         ctx.save();
-        ctx.shadowBlur = isMobile ? 8 : 18;
+        ctx.shadowBlur = (isMobile && width < 480) ? 5 : (isMobile ? 8 : 18);
         ctx.shadowColor = n.colorHex;
         ctx.globalAlpha = n.opacity * 0.5;
         ctx.beginPath();

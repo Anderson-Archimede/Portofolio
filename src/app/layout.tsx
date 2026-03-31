@@ -39,6 +39,12 @@ const jsonLd = {
   ],
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://anderson-kouassi.dev"),
   title: "Anderson Kouassi — Data Analyst & Consultant BI",

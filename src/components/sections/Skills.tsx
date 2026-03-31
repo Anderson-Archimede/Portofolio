@@ -156,7 +156,10 @@ export default function Skills() {
 
         <ScrollReveal>
           <SectionLabel text={t.skills.label} />
-          <h2 className="section-title font-display mt-4 mb-12 md:mb-16">
+          <h2
+            className="section-title font-display mt-4 mb-12 md:mb-16"
+            style={{ fontSize: "clamp(22px, 6vw, 60px)" }}
+          >
             {t.skills.title}
           </h2>
         </ScrollReveal>
@@ -168,9 +171,8 @@ export default function Skills() {
 
         {/* ── 4 skill cards ── */}
         <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: "20px",
             marginBottom: "56px",
           }}
@@ -193,22 +195,22 @@ export default function Skills() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "16px",
-              alignItems: "flex-start",
-            }}
-          >
-            {/* Certification cards */}
-            {certs.map((cert) => (
-              <CertCard key={cert.name} cert={cert} />
-            ))}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
-            {/* Language badges */}
+            {/* Certification cards — 1-col mobile, 2-col md+ */}
+            <div
+              className="grid grid-cols-1 md:grid-cols-2"
+              style={{ gap: "16px" }}
+            >
+              {certs.map((cert) => (
+                <CertCard key={cert.name} cert={cert} />
+              ))}
+            </div>
+
+            {/* Language badges — max-w-full prevents overflow on narrow screens */}
             <div
               style={{
+                maxWidth: "100%",
                 display: "flex",
                 gap: "10px",
                 flexWrap: "wrap",
@@ -218,6 +220,7 @@ export default function Skills() {
                 border: `1px solid ${CYAN}28`,
                 borderTop: `3px solid ${CYAN}`,
                 borderRadius: "12px",
+                overflowX: "hidden",
               }}
             >
               {langs.map((l) => (
@@ -244,6 +247,7 @@ export default function Skills() {
                       color: CYAN,
                       fontFamily: "var(--font-mono)",
                       marginTop: "4px",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {l.level}
@@ -252,6 +256,7 @@ export default function Skills() {
                 </div>
               ))}
             </div>
+
           </div>
         </ScrollReveal>
 
@@ -303,7 +308,7 @@ function CertCard({ cert }: { cert: Certification }) {
         border: `1px solid var(--color-border)`,
         borderLeft: `3px solid ${cert.color}`,
         borderRadius: "12px",
-        minWidth: "220px",
+        minWidth: 0,
       }}
     >
       {/* Icon circle */}
